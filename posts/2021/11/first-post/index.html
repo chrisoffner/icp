@@ -151,8 +151,12 @@
     crossorigin="anonymous"></script>
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
-    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body, {
+        delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+  ],
+    });"></script>
       
 
       
@@ -214,11 +218,18 @@ I can make things <em>italic</em> and <strong>bold</strong> if needed.</p>
 
         <div class="pagination__buttons">
             
+            <span class="button previous">
+                <a href="https://chrisoffner.github.io/studynotes/posts/2021/11/another-reee-test/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Another Reee test</span>
+                </a>
+            </span>
+            
 
             
             <span class="button next">
-                <a href="https://chrisoffner.github.io/studynotes/posts/2021/11/iterative-closest-point-icp-algorithm/">
-                    <span class="button__text">Iterative Closest Point (ICP) Algorithm</span>
+                <a href="https://chrisoffner.github.io/studynotes/posts/2021/11/introduction-to-icp/">
+                    <span class="button__text">Introduction to ICP</span>
                     <span class="button__icon">→</span>
                 </a>
             </span>
