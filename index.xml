@@ -2,38 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Study Notes</title>
-    <link>https://chrisoffner.github.io/studynotes/</link>
+    <link>https://example.com/</link>
     <description>Recent content on Study Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 10 Nov 2021 11:48:27 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 10 Nov 2021 11:48:27 +0100</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First Post</title>
-      <link>https://chrisoffner.github.io/studynotes/post/first-post/</link>
+      <link>https://example.com/posts/2021/11/first-post/</link>
       <pubDate>Wed, 10 Nov 2021 11:48:27 +0100</pubDate>
       
-      <guid>https://chrisoffner.github.io/studynotes/post/first-post/</guid>
-      
-      <description>&lt;p&gt;This is my first post testing Hugo.&lt;/p&gt;
-&lt;h2 id=&#34;testing-h2-headers&#34;&gt;Testing H2 headers&lt;/h2&gt;
-&lt;p&gt;This is just a default body paragraph to see how the typography looks. Inline code looks like &lt;code&gt;print(&amp;quot;Hello World!&amp;quot;)&lt;/code&gt;.
-I can make things &lt;em&gt;italic&lt;/em&gt; and &lt;strong&gt;bold&lt;/strong&gt; if needed.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Quotes look like this.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;h3-headers-are-also-supported&#34;&gt;H3 headers are also supported.&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUI&lt;/span&gt;
-
-&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-        &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Hello Hugo!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;mathjax-looks-like-this&#34;&gt;MathJax looks like this&lt;/h2&gt;
-&lt;p&gt;$$\frac{x^2}{\sum_{i=0}^\infty x^i}$$&lt;/p&gt;</description>
-      
+      <guid>https://example.com/posts/2021/11/first-post/</guid>
+      <description>&lt;p&gt;This is my first post testing Hugo.&lt;/p&gt;</description>
     </item>
     
   </channel>
 </rss>
-

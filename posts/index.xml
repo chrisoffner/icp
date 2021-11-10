@@ -1,0 +1,39 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Study Notes</title>
+        <link>https://example.com/posts/</link>
+        <description>Recent content in Posts on Study Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Wed, 10 Nov 2021 11:48:27 +0100</lastBuildDate>
+        <atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>First Post</title>
+            <link>https://example.com/posts/2021/11/first-post/</link>
+            <pubDate>Wed, 10 Nov 2021 11:48:27 +0100</pubDate>
+            
+            <guid>https://example.com/posts/2021/11/first-post/</guid>
+            <description>&lt;p&gt;This is my first post testing Hugo.&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>This is my first post testing Hugo.</p>
+<h2 id="testing-h2-headers">Testing H2 headers</h2>
+<p>This is just a default body paragraph to see how the typography looks. Inline code looks like <code>print(&quot;Hello World!&quot;)</code>.
+I can make things <em>italic</em> and <strong>bold</strong> if needed.</p>
+<blockquote>
+<p>Quotes look like this.</p>
+</blockquote>
+<h3 id="h3-headers-are-also-supported">H3 headers are also supported.</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">SwiftUI</span>
+
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MyView</span>: View {
+    <span style="color:#66d9ef">var</span> body: some View {
+        Text(<span style="color:#e6db74">&#34;Hello Hugo!&#34;</span>)
+    }
+}
+</code></pre></div><h2 id="mathjax-looks-like-this">MathJax looks like this</h2>
+<p>$$\frac{x^2}{\sum_{i=0}^\infty x^i}$$</p>]]></content>
+        </item>
+        
+    </channel>
+</rss>
