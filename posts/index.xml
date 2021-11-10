@@ -67,7 +67,7 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>$$\sum_{(i,j)\in C} ||y_i - Rx_j - t||^2 \rightarrow \min$$</p>
 <h3 id="simplified-correspondences">Simplified correspondences</h3>
 <p>Reorder point clouds \(X, Y\) given the correspondences \(C\) using an index \(n\).</p>
-<p>Point sets ${x_n}, {y_n}$</p>
+<p>Point sets \({x_n}, {y_n}\)</p>
 <p>Find the rigid body transform</p>
 <p>$$\overline{x}_n = R x_n + t, \quad n\in{1,&hellip;, N}, N := |C|$$</p>
 <p>that transforms points \({x_n}\) into \({\overline{x}_n}\) such that the point set \({\overline{x}_n}\) will be as close as possible to the point set \({y_n}\), i.e. minimising the sum of squared point-to-point distances.</p>
@@ -76,8 +76,8 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>$$\overline{x}_n = \lambda R \bold{x}_n + \bold{t}$$</p>
 <p>transforming 3D point sets, including a scaling factor \(\lambda\). Here, we only need the rigid body transform, meaning we assume \(\lambda = 1\).</p>
 <h3 id="formal-problem-definition">Formal problem definition</h3>
-<p>Given corresponding points $x_n, y_n, n \in {1,&hellip;, N}$</p>
-<p>and optionally weights $p_n$</p>
+<p>Given corresponding points \(x_n, y_n, n \in {1,&hellip;, N}\)</p>
+<p>and optionally weights \(p_n\)</p>
 <p>find the parameters \(R, \bold{t}\) of the rigid body transform with</p>
 <p>$$\overline{x}_n = R\bold{x}_n + \bold{t},\quad n\in{1,&hellip;,N}$$</p>
 <p>such that the squared error is minimised</p>
@@ -91,29 +91,29 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <li>computes a <em>shift</em> involving the <em>centres of mass</em> of both point clouds</li>
 <li>performs a <em>rotational</em> alignment using SVD</li>
 </ul>
-<h3 id="direct-computation-of-the-rotation-matrix-r">Direct computation of the rotation matrix $R$</h3>
+<h3 id="direct-computation-of-the-rotation-matrix-r">Direct computation of the rotation matrix \(R\)</h3>
 <p>$$\bold{x}_0 = \frac{\sum \bold{x}_np_n}{\sum p_n} \qquad \bold{y}_0 = \frac{\sum \bold{y}_np_n}{\sum p_n}$$</p>
 <p>Use the weighted means of each point set to calculate a so-called <strong>cross-covariance (or cross-correlation) matrix \(H\):</strong></p>
 <p>$$H = \sum(\bold{y}_n - \bold{y}_0)(\bold{x}_n - \bold{x}_0)^T p_n$$</p>
-<p>And then we decompose \(H\) into three matrices \(U, D,\) and $V.$</p>
+<p>And then we decompose \(H\) into three matrices \(U, D,\) and \(V.\)</p>
 <p>$$\mathrm{svd}(H) = UDV^T$$</p>
 <p>The rotation matrix we&rsquo;re looking for is</p>
 <p>$$R = VU^T$$</p>
-<h3 id="direct-computation-of-the-translation-vector-boldt">Direct computation of the translation vector $\bold{t}$</h3>
+<h3 id="direct-computation-of-the-translation-vector-boldt">Direct computation of the translation vector \(\bold{t}\)</h3>
 <p>$$t = \bold{y}_0 - R\bold{x}_0$$</p>
 <h3 id="svd-based-alignment">SVD-based alignment</h3>
 <p>Compute mean-reduced coordinates</p>
 <ul>
-<li>$\bold{a}_n = (\bold{y}_n - \bold{y}_0)$</li>
-<li>$\bold{b}_n = (\bold{x}_n - \bold{x}_0)$</li>
+<li>\(\bold{a}_n = (\bold{y}_n - \bold{y}_0)\)</li>
+<li>\(\bold{b}_n = (\bold{x}_n - \bold{x}_0)\)</li>
 </ul>
 <p>Compute cross-covariance matrix</p>
 <ul>
-<li>$H = \sum \bold{a}_n \bold{b}_n^T p_n$</li>
+<li>\(H = \sum \bold{a}_n \bold{b}_n^T p_n\)</li>
 </ul>
 <p>Compute SVD</p>
 <ul>
-<li>$\mathrm{svd(H)} = UDV^T$</li>
+<li>\(\mathrm{svd(H)} = UDV^T\)</li>
 </ul>
 <p>Rotation matrix is given by</p>
 <ul>
@@ -121,15 +121,15 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 </ul>
 <p>Translation vector is given by</p>
 <ul>
-<li>$t = y_0 - Rx_0$</li>
+<li>\(t = y_0 - Rx_0\)</li>
 </ul>
 <p>Translate and rotate points</p>
 <ul>
-<li>$\overline{x}_n=R x_n + t$</li>
+<li>\(\overline{x}_n=R x_n + t\)</li>
 </ul>
 <h2 id="derivation">Derivation</h2>
 <h3 id="use-local-coordinate-system">Use local coordinate system</h3>
-<p>We want to use local coordinates defined by the point set ${y_n}$</p>
+<p>We want to use local coordinates defined by the point set \({y_n}\)</p>
 <p>We set the origin as the weighted mean of \({y_n}\) computed by</p>
 <p>$$y_0 = \frac{\sum y_np_n}{\sum p_n}$$</p>
 <p>such that we minimise</p>
@@ -137,7 +137,7 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <h3 id="rewrite-translation-vector">Rewrite translation vector</h3>
 <p>Start with \(\overline{x}_n = Rx_n+t\) and use the shift of the origin \(\overline{x}_n - y_0 = Rx_n + t - y_0\) to rewrite the translation vector. Here we exploit the fact that for rotation matrices, \(R R^T = I\):</p>
 <p>$$⁍$$</p>
-<p>Introduce a <em><strong>new variable</strong></em> $x_0 = R^T y_0-R^Tt:$</p>
+<p>Introduce a <em><strong>new variable</strong></em> \(x_0 = R^T y_0-R^Tt:\)</p>
 <p>$$\overline{x}_n-y_0 = R(x_n-x_0)$$</p>
 <h3 id="minimisation">Minimisation</h3>
 <p>Initially formulated problem:</p>
@@ -157,7 +157,7 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <li>2\sum &amp;(y_n-y_0)^TR(x_n-x_0)p_n
 \end{align*}$$</li>
 </ul>
-<h3 id="minimise-with-regard-to-x_0">Minimise with regard to $x_0$</h3>
+<h3 id="minimise-with-regard-to-x_0">Minimise with regard to \(x_0\)</h3>
 <p>$$\begin{align*}
 \frac{\partial\Phi(x_0, R)}{\partial x_0} = &amp;-2\sum(x_n - x_0)p_n\
 &amp;+2\sum R^T(y_n-y_0)p_n
@@ -172,14 +172,14 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>This leads to</p>
 <p>$$x_0 = \frac{\sum x_np_n}{\sum p_n}$$</p>
 <p>which means <strong>the optimal value for \(x_0\) is the weighted mean of the points</strong> \(x_n\).</p>
-<h3 id="minimise-with-regard-to-r">Minimise with regard to $R$</h3>
+<h3 id="minimise-with-regard-to-r">Minimise with regard to \(R\)</h3>
 <p>Only the third term of \(\Phi(x_0, R)\) depends on \(R.\) We therefore need to find the \(R\) that maximises</p>
 <p>$$\sum (y_n-y_0)^TR(x_n-x_0)p_n$$</p>
 <p>with the constraint \(R^TR = I\).</p>
 <p>Compute mean-reduced coordinates</p>
 <ul>
-<li>$\bold{b}_n = (\bold{y}_n - \bold{y}_0)$</li>
-<li>$\bold{a}_n = (\bold{x}_n - \bold{x}_0)$</li>
+<li>\(\bold{b}_n = (\bold{y}_n - \bold{y}_0)\)</li>
+<li>\(\bold{a}_n = (\bold{x}_n - \bold{x}_0)\)</li>
 </ul>
 <p>This leads to the compact form</p>
 <p>$$\sum b_n^TRa_np_n$$</p>
@@ -188,10 +188,10 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 R^* = &amp;\argmax_R \sum b_n^TRa_np_n\
 = &amp;\argmax_R \mathrm{tr}(RH)
 \end{align*}$$</p>
-<p>with the cross-covariance matrix $H = \sum(a_nb_n^T)p_n$</p>
+<p>with the cross-covariance matrix \(H = \sum(a_nb_n^T)p_n\)</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
-<p>Thus we need to find \(R\) that maximises $\mathrm{tr}(RH)$</p>
+<p>Thus we need to find \(R\) that maximises \(\mathrm{tr}(RH)\)</p>
 <h3 id="maximisation-using-svd">Maximisation using SVD</h3>
 <p>$$\mathrm{svd}(H) = UDV^T$$</p>
 <p>with  \(U^TU = I,\quad V^TV=I,\quad D=\mathrm{diag}(d_i)\).</p>
