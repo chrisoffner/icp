@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://chrisoffner.github.io/studynotes/post/first-post/</loc>
+    <lastmod>2021-11-10T11:48:27+01:00</lastmod>
+  </url><url>
+    <loc>https://chrisoffner.github.io/studynotes/post/</loc>
+    <lastmod>2021-11-10T11:48:27+01:00</lastmod>
+  </url><url>
+    <loc>https://chrisoffner.github.io/studynotes/</loc>
+    <lastmod>2021-11-10T11:48:27+01:00</lastmod>
+  </url><url>
+    <loc>https://chrisoffner.github.io/studynotes/categories/</loc>
+  </url><url>
+    <loc>https://chrisoffner.github.io/studynotes/tags/</loc>
+  </url>
+</urlset>
