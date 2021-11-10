@@ -17,5 +17,14 @@
       <description>&lt;p&gt;This is my first post testing Hugo.&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Iterative Closest Point (ICP) Algorithm</title>
+      <link>https://chrisoffner.github.io/studynotes/posts/2021/11/iterative-closest-point-icp-algorithm/</link>
+      <pubDate>Wed, 10 Nov 2021 11:48:27 +0100</pubDate>
+      
+      <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/iterative-closest-point-icp-algorithm/</guid>
+      <description>ICP is used in Simultaneous Localisation and Mapping (SLAM) systems for LiDAR or RGBD data The algorithm is comprised of two steps:  Data association Let \(A, B\) be our point clouds. For each point \(a_i \in A\) we perform a nearest-neighbour search among points \(b_j \in B\) to find the point \(b_j\) with closest distance to \(a_i\). Transformation Align point clouds on top of each other. Compute centres of mass.</description>
+    </item>
+    
   </channel>
 </rss>
