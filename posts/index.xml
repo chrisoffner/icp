@@ -99,7 +99,7 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>$$\mathrm{svd}(H) = UDV^T$$</p>
 <p>The rotation matrix we&rsquo;re looking for is</p>
 <p>$$R = VU^T$$</p>
-<h3 id="direct-computation-of-the-translation-vector-boldt">Direct computation of the translation vector \(\bold{t}\)</h3>
+<h3 id="direct-computation-of-the-translation-vector--boldt">Direct computation of the translation vector  \(\bold{t}\)</h3>
 <p>$$t = \bold{y}_0 - R\bold{x}_0$$</p>
 <h3 id="svd-based-alignment">SVD-based alignment</h3>
 <p>Compute mean-reduced coordinates</p>
@@ -136,7 +136,7 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>$$\sum ||y_n - y_0 - Rx_n - t + y_0||^2 p_n \rightarrow \min$$</p>
 <h3 id="rewrite-translation-vector">Rewrite translation vector</h3>
 <p>Start with \(\overline{x}_n = Rx_n+t\) and use the shift of the origin \(\overline{x}_n - y_0 = Rx_n + t - y_0\) to rewrite the translation vector. Here we exploit the fact that for rotation matrices, \(R R^T = I\):</p>
-<p>$$⁍$$</p>
+<p>$$\overline{x}_n -y_0 = R(x_n + R^Tt-R^Ty_0)$$</p>
 <p>Introduce a <em><strong>new variable</strong></em> \(x_0 = R^T y_0-R^Tt:\)</p>
 <p>$$\overline{x}_n-y_0 = R(x_n-x_0)$$</p>
 <h3 id="minimisation">Minimisation</h3>
@@ -144,31 +144,16 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>$$\sum || y_n - \overline{x}_n||^2p_n \rightarrow \min$$</p>
 <p>turns into</p>
 <p>$$\sum || y_n - y_0 - R(x_n - x_0)||^2p_n \rightarrow \min$$</p>
-<p>We need to find \(R^<em>, x_0^</em>\) such that</p>
-<p>$$R^<em>, x_0^</em> = \argmin_{R, x_0}\sum || y_n - y_0 - R(x_n - x_0)||^2p_n$$</p>
+<p>We need to find \(R^*, x_0^*\) such that</p>
+<p>$$R^*, x_0^* = \argmin_{R, x_0}\sum || y_n - y_0 - R(x_n - x_0)||^2p_n$$</p>
 <p>Computation:</p>
-<p>$$\begin{align*}
-\Phi(x_0, R) \coloneqq \sum &amp;\left[ (y_n -y_0) - R(x_n - x_0) \right]^T\&amp;\left[ (y_n -y_0) - R(x_n - x_0) \right]p_n\
-= \sum &amp;(y_n-y_0)^T(y_n-y_0)p_n &amp;&amp; \text{(no \(R, x_0\))}\</p>
-<ul>
-<li>\sum &amp;(x_n-x_0)^T(x_n-x_0)p_n&amp;&amp; \text{(no \(R\))}\</li>
-</ul>
-<ul>
-<li>2\sum &amp;(y_n-y_0)^TR(x_n-x_0)p_n
-\end{align*}$$</li>
-</ul>
+<p>$$\begin{aligned}\Phi(x_0, R) \coloneqq \sum &amp; (y_n -y_0) - R(x_n - x_0) ^T\\&amp; (y_n -y_0) - R(x_n - x_0) p_n\\= \sum &amp;(y_n-y_0)^T(y_n-y_0)p_n &amp;&amp; \text{(no \(R, x_0\))}\\+ \sum &amp;(x_n-x_0)^T(x_n-x_0)p_n&amp;&amp; \text{(no \(R\))}\\- 2\sum &amp;(y_n-y_0)^TR(x_n-x_0)p_n\end{aligned}$$</p>
 <h3 id="minimise-with-regard-to-x_0">Minimise with regard to \(x_0\)</h3>
-<p>$$\begin{align*}
-\frac{\partial\Phi(x_0, R)}{\partial x_0} = &amp;-2\sum(x_n - x_0)p_n\
-&amp;+2\sum R^T(y_n-y_0)p_n
-\end{align*}$$</p>
+<p>$$\begin{aligned}\frac{\partial\Phi(x_0, R)}{\partial x_0} = &amp;-2\sum(x_n - x_0)p_n\\&amp;+2\sum R^T(y_n-y_0)p_n\end{aligned}$$</p>
 <p>Setting the first derivative to zero simplifies this to:</p>
 <p>$$\sum(x_n - x_0)p_n = R^T\sum (y_n-y_0)p_n$$</p>
 <p>The right side of this equals zero because \(y_0\) is the weighted mean of \(y_n\).</p>
-<p>$$\begin{align*}
-0 = &amp;\sum(x_n-x_0)p_n\
-= &amp;\sum x_np_n - x_0\sum p_n
-\end{align*}$$</p>
+<p>$$\begin{aligned}0 = &amp;\sum(x_n-x_0)p_n\\= &amp;\sum x_np_n - x_0\sum p_n\end{aligned}$$</p>
 <p>This leads to</p>
 <p>$$x_0 = \frac{\sum x_np_n}{\sum p_n}$$</p>
 <p>which means <strong>the optimal value for \(x_0\) is the weighted mean of the points</strong> \(x_n\).</p>
@@ -184,10 +169,8 @@ Compute rotation using Singular Value Decomposition (SVD).</li>
 <p>This leads to the compact form</p>
 <p>$$\sum b_n^TRa_np_n$$</p>
 <h3 id="rewrite-using-the-trace">Rewrite using the trace</h3>
-<p>$$\begin{align*}
-R^* = &amp;\argmax_R \sum b_n^TRa_np_n\
-= &amp;\argmax_R \mathrm{tr}(RH)
-\end{align*}$$</p>
+<p>$$\begin{aligned}
+R^* = &amp;\argmax_R \sum b_n^TRa_np_n\\= &amp;\argmax_R \mathrm{tr}(RH)\end{aligned}$$</p>
 <p>with the cross-covariance matrix \(H = \sum(a_nb_n^T)p_n\)</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
