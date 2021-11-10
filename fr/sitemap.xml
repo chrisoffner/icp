@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.com/fr/categories/</loc>
+    <loc>https://chrisoffner.github.io/studynotes/fr/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/categories/"
+                href="https://chrisoffner.github.io/studynotes/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://example.com/fr/categories/"
+                href="https://chrisoffner.github.io/studynotes/fr/categories/"
                 />
   </url><url>
-    <loc>https://example.com/fr/series/</loc>
+    <loc>https://chrisoffner.github.io/studynotes/fr/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/series/"
+                href="https://chrisoffner.github.io/studynotes/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://example.com/fr/series/"
+                href="https://chrisoffner.github.io/studynotes/fr/series/"
                 />
   </url><url>
-    <loc>https://example.com/fr/</loc>
+    <loc>https://chrisoffner.github.io/studynotes/fr/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/"
+                href="https://chrisoffner.github.io/studynotes/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://example.com/fr/"
+                href="https://chrisoffner.github.io/studynotes/fr/"
                 />
   </url><url>
-    <loc>https://example.com/fr/tags/</loc>
+    <loc>https://chrisoffner.github.io/studynotes/fr/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://example.com/tags/"
+                href="https://chrisoffner.github.io/studynotes/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://example.com/fr/tags/"
+                href="https://chrisoffner.github.io/studynotes/fr/tags/"
                 />
   </url>
 </urlset>
