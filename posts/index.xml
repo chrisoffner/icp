@@ -6,8 +6,110 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-        <lastBuildDate>Wed, 10 Nov 2021 18:32:00 +0100</lastBuildDate>
+        <lastBuildDate>Sun, 21 Nov 2021 19:08:00 +0100</lastBuildDate>
         <atom:link href="https://chrisoffner.github.io/studynotes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Deriving the optimal ICP translation</title>
+            <link>https://chrisoffner.github.io/studynotes/posts/2021/11/deriving-the-optimal-icp-translation/</link>
+            <pubDate>Sun, 21 Nov 2021 19:08:00 +0100</pubDate>
+            
+            <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/deriving-the-optimal-icp-translation/</guid>
+            <description>In their paper On the ICP Algorithm the authors Esther Ezra, Micha Sharir, and Alon Efrat write:
+ Lemma 2.3 At each iteration $i \ge 2$ of the algorithm, the relative translation vector $\Delta t_i$ satisfies
+$$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})\right),$$
+where $\boldsymbol{t_j} = \sum_{k=1}^j \boldsymbol{\Delta t_k}.$
+Proof Follows using easy algebraic manipulations, based on the obvious equality that follows by construction</description>
+            <content type="html"><![CDATA[<p>In their paper <a href="https://dl.acm.org/doi/10.1145/1137856.1137873"><strong>On the ICP Algorithm</strong></a> the authors <a href="https://www.cs.biu.ac.il/en/staff/113">Esther Ezra</a>, <a href="https://www.cs.tau.ac.il/~michas/">Micha Sharir</a>, and <a href="https://www2.cs.arizona.edu/~alon/">Alon Efrat</a> write:</p>
+<blockquote>
+<p><strong>Lemma 2.3</strong>
+At each iteration $i \ge 2$ of the algorithm, the relative translation vector $\Delta t_i$ satisfies</p>
+<p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})\right),$$</p>
+<p>where $\boldsymbol{t_j} = \sum_{k=1}^j \boldsymbol{\Delta t_k}.$</p>
+<p><strong>Proof</strong>
+Follows using easy algebraic manipulations, based on the obvious equality that follows by construction</p>
+<p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right)$$</p>
+</blockquote>
+<p>Unfortunately this supposedly <em>&ldquo;obvious equality&rdquo;</em>  wasn&rsquo;t quite so obvious to me, and neither were the &ldquo;<em>easy</em> algebraic manipulations&rdquo; that would prove the lemma.</p>
+<p>Only after working through Cyrill Stachniss' great <a href="https://www.youtube.com/watch?v=dhzLQfDBx2Q"><em>lecture</em></a> on the topic was I able to derive this &ldquo;obvious&rdquo; equality, as follows.</p>
+<h3 id="use-local-coordinate-system">Use local coordinate system</h3>
+<p>To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</p>
+<p>$$\boldsymbol{b_0} := \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$$</p>
+<p>such that in iteration $i$ we want to find the $\boldsymbol{\Delta t_i}$ that minimises the cost function</p>
+<p>$$\mathrm{RMS}(\boldsymbol{\Delta t_i}) = \frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - \boldsymbol{b_0} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i} + \boldsymbol{b_0}||^2.$$</p>
+<h3 id="rewrite-translation-vector">Rewrite translation vector</h3>
+<p>We introduce a <em><strong>new variable</strong></em> $\boldsymbol{a_0} := \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and can then rewrite the expression of point $\boldsymbol{a}$ translated by the newest translation vector:</p>
+<p>$$(\boldsymbol{a} + \boldsymbol{t_{i-1}}) + \boldsymbol{\Delta t_i} - \boldsymbol{b_0} = (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}$$</p>
+<p>Note that, while the notation of $\boldsymbol{a_0}$ alludes to a semantic meaning similar to that of $\boldsymbol{b_0}$, it is currently simply defined as $\boldsymbol{b_0} - \boldsymbol{\Delta t_i}$, with no obvious connection to the mean of $A$. The connection will show up as we proceed.</p>
+<h3 id="minimisation">Minimisation</h3>
+<p>Our initially formulated minimisation function</p>
+<p>$$\frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i}||^2.$$</p>
+<p>can therefore be rewritten with $\boldsymbol{a_0}$. Now in order to minimise our function we need to find</p>
+<p>$$\argmin_{a_0}\frac{1}{m}\sum_{\boldsymbol{a} \in A} || (\boldsymbol{N_B(a+t_{i-1}}) - \boldsymbol{b_0}) - ((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0})||^2.$$</p>
+<p>Let&rsquo;s simplify the notation in this long expression a bit by defining two new variables</p>
+<p>$$\begin{aligned}\boldsymbol{\widetilde{b}} := &amp;N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) \cr \boldsymbol{\widetilde{a}} := &amp;\boldsymbol{a} + \boldsymbol{t_{i-1}}\end{aligned}$$</p>
+<p>and use those as we expand our cost function:</p>
+<p>$$\begin{aligned}\Phi(\boldsymbol{a_0}) \coloneqq \frac{1}{m}\sum_{\boldsymbol{\widetilde{a}} \in A + \boldsymbol{t_{i-1}}} &amp;\left[ (\boldsymbol{\widetilde{b}} - \boldsymbol{b_0}) - (\boldsymbol{\widetilde{a}} - \boldsymbol{a_0}) \right]^T\left[ (\boldsymbol{\widetilde{b}} - \boldsymbol{b_0}) - (\boldsymbol{\widetilde{a}} - \boldsymbol{a_0}) \right] \cr = \frac{1}{m}\sum_{\boldsymbol{\widetilde{a}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{\widetilde{b}} - \boldsymbol{b_0})^T(\boldsymbol{\widetilde{b}} - \boldsymbol{b_0}) &amp;&amp; \text{(constant)} \cr + \frac{1}{m}\sum_{\boldsymbol{\widetilde{a}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{\widetilde{a}} - \boldsymbol{a_0})^T(\boldsymbol{\widetilde{a}} - \boldsymbol{a_0})&amp;&amp;(*) \cr - \frac{2}{m}\sum_{\boldsymbol{\widetilde{a}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{\widetilde{b}} - \boldsymbol{b_0})^T(\boldsymbol{\widetilde{a}} - \boldsymbol{a_0}) &amp;&amp; (**)\end{aligned}$$</p>
+<p>To find the minimum of this convex function we calculate its first derivative</p>
+<p>$$\begin{aligned}
+\frac{\mathrm{d} \Phi}{\mathrm{d} \boldsymbol{a_0}} = &amp;-\frac{2}{m}\sum_{\boldsymbol{\widetilde{a}} \in A + \boldsymbol{t_{i-1}}}(\boldsymbol{\widetilde{a}} - \boldsymbol{a_0})&amp;&amp;(*)\cr
+&amp;+\frac{2}{m}\sum_{\boldsymbol{\widetilde{a}} \in A + \boldsymbol{t_{i-1}}} (\boldsymbol{\widetilde{b}} - \boldsymbol{b_0}) &amp;&amp; (**)
+\end{aligned}$$</p>
+<p>and set it equal to zero, which simplifies to</p>
+<p>$$\sum_{a \in A}((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}) = \sum_{a \in A} (\boldsymbol{N_B(a+t_{i-1}}) - \boldsymbol{b_0}).$$</p>
+<p>The right side of this equation equals zero because $\boldsymbol{b_0}$ is the mean of $$ all nearest neighbours ${N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}},|, \boldsymbol{a} \in A)}$. Now we can solve for $\boldsymbol{a_0}$:</p>
+<p>$$\begin{aligned}0 = &amp;\sum_{a \in A}((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}) \cr = &amp;\sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \sum a_0 \cr = &amp;\sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - m \cdot \boldsymbol{a_0}\cr\implies \boldsymbol{a_0} = &amp;\frac{1}{m} \sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \end{aligned}$$</p>
+<p>which means <strong>the optimal value for $\boldsymbol{a_0}$ is the weighted mean of the points</strong> $\boldsymbol{a} + \boldsymbol{t_{i-1}}$.</p>
+<p>Since $\boldsymbol{a_0} = \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and $\boldsymbol{b_0} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$ it follows that</p>
+<p>$$\begin{aligned}\boldsymbol{\Delta t_i} = &amp; \boldsymbol{b_0} - \boldsymbol{a_0} \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}}) - \frac{1}{m} \sum_{\boldsymbol{a} \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a + t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right) \end{aligned}$$</p>
+<p>The optimal translation vector is therefore the mean of differences between points marked as nearest neighbours in $B$ and their corresponding points in $A + \boldsymbol{t_{i-1}}$.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Illustrating ICP in one dimension</title>
+            <link>https://chrisoffner.github.io/studynotes/posts/2021/11/illustrating-icp-in-one-dimension/</link>
+            <pubDate>Sun, 21 Nov 2021 16:35:48 +0100</pubDate>
+            
+            <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/illustrating-icp-in-one-dimension/</guid>
+            <description>To get a better intuition of what the iterative closest point (ICP) algorithm does, let&amp;rsquo;s look at a visual representation of its simplest form – the one-dimensional case which is only concerned with translation, but not rotation.
+Problem definition Let $A = \{{\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}\}}, B = \{{\boldsymbol{b_1}, &amp;hellip;, \boldsymbol{b_n} \}}$ be two point sets in $d$-space, in the following illustration $d = 1$, and suppose that the ICP algorithm aligns $A$ to $B$, i.</description>
+            <content type="html"><![CDATA[<p>To get a better intuition of what the iterative closest point (ICP) algorithm does, let&rsquo;s look at a visual representation of its simplest form – the one-dimensional case which is only concerned with translation, but not rotation.</p>
+<h3 id="problem-definition">Problem definition</h3>
+<p>Let $A = \{{\boldsymbol{a_1}, &hellip;, \boldsymbol{a_m}\}}, B = \{{\boldsymbol{b_1}, &hellip;, \boldsymbol{b_n} \}}$ be two point sets in $d$-space, in the following illustration $d = 1$, and suppose that the ICP algorithm aligns $A$ to $B$, i.e. $B$ is fixed and $A$ is translated to best fit $B$.</p>
+<p>The algorithm repeatedly iterates over its two steps:</p>
+<ol>
+<li>
+<p>For each (translated) point $\boldsymbol{a} + \boldsymbol{t_{i-1}} \ in A + \boldsymbol{t_{i-1}}$ it registers a correspondence to its nearest neighbour $N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}})$ in $B$.</p>
+</li>
+<li>
+<p>Based on these point correspondences, it then computes a relative translation vector $\boldsymbol{\Delta t_i}$ that minimises a cost function $\Phi$ and translates $A + \boldsymbol{t_{i-1}}$ by that vector.</p>
+</li>
+</ol>
+<p>The algorithm terminates once $\boldsymbol{\Delta t_i} = 0$.</p>
+<h3 id="illustration">Illustration</h3>
+<p>Let&rsquo;s now look at a visual representation of a full run of the ICP algorithm in one dimension. For better illustration, the point sets $A$ (red) and $B$ (blue) have been offset vertically, but are to be understood as both lying on the same one-dimensional number line $\R$. The following example uses the <em><a href="https://en.wikipedia.org/wiki/Root_mean_square">root mean square</a></em> cost function</p>
+<p>$$\Phi(\boldsymbol{\Delta t_i}) = \mathrm{RMS}(\boldsymbol{\Delta t_i}) = \frac{1}{m}\sum_{a \in A}|| (a + t_i + \boldsymbol{\Delta t_i}) - N_B(a + t_{i-1}) ||^2$$</p>
+<p>where $||\cdot||$ is the Euclidean norm and $m = |A|$.</p>
+<p>The notation largely follows the conventions laid out in <em><a href="https://dl.acm.org/doi/10.1145/1137856.1137873">On the ICP Algorithm</a></em> by Esther Ezra, Micha Sharir, and Alon Efrat.</p>
+<h4 id="iteration-1">Iteration 1</h4>
+<p>We begin with $A = \{{ 16, 17, 25, 26 \}}$ and $B = \{{1, 2, 10, 11\}}$. It is easy to see that in this first iteration, all points of $A$ will be assigned $\boldsymbol{b_4} = 11$ as their nearest neighbour, and will therefore be &ldquo;pulled&rdquo; strongly to the left.</p>
+<p><img src="/images/icp_graph_01.svg" alt="icp_graph_01.svg"></p>
+<h4 id="iteration-2">Iteration 2</h4>
+<p>After the first translation by $\boldsymbol{\Delta t_1} = -10$, something interesting happens. The two left-most points in the now translated red set, $A + \boldsymbol{t_1}$, have moved so far that they get assigned new nearest neighbours. Now the second red point $a_2 +  \boldsymbol{t_1}$ pulls to its right, and the resulting optimal translation vector $\boldsymbol{\Delta t_2} = -2.5$ is already much shorter than before.</p>
+<p><img src="/images/icp_graph_02.svg" alt="icp_graph_02.svg"></p>
+<h4 id="iteration-3">Iteration 3</h4>
+<p>In the next iteration, the second red point&rsquo;s corresponding point changes again, causing it to join the others again in &ldquo;pulling&rdquo; further to the left.</p>
+<p><img src="/images/icp_graph_03.svg" alt="icp_graph_03.svg"></p>
+<h4 id="iteration-4">Iteration 4</h4>
+<p>Now the first and third red point get new nearest neighbours in $B$, resulting in one final slight tug to the left.</p>
+<p><img src="/images/icp_graph_04.svg" alt="icp_graph_04.svg"></p>
+<h3 id="iteration-5">Iteration 5</h3>
+<p>In the end, $A + \boldsymbol{t_4}$ rests in the optimal position so that $\boldsymbol{\Delta t_5} = 0$ and the algorithm terminates.</p>
+<p><img src="/images/icp_graph_05.svg" alt="icp_graph_05.svg"></p>
+<p>Next up we will derive the optimal relative translation vector $\boldsymbol{\Delta t_i}$ at every step.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Introduction to ICP</title>
@@ -15,196 +117,46 @@
             <pubDate>Wed, 10 Nov 2021 18:32:00 +0100</pubDate>
             
             <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/introduction-to-icp/</guid>
-            <description>ICP is used in Simultaneous Localisation and Mapping (SLAM) systems for LiDAR or RGBD data The algorithm is comprised of two steps:  Data association Let $A, B$ be our point clouds. For each point $a_i \in A$ we perform a nearest-neighbour search among points $b_j \in B$ to find the point $b_j$ with closest distance to $a_i$. Transformation Align point clouds on top of each other. Compute centres of mass.</description>
-            <content type="html"><![CDATA[<ul>
-<li>ICP is used in Simultaneous Localisation and Mapping (SLAM) systems for LiDAR or RGBD data</li>
-<li>The algorithm is comprised of two steps:
-<ul>
-<li><strong>Data association</strong>
-Let $A, B$ be our point clouds.
-For each point $a_i \in A$ we perform a nearest-neighbour search among points $b_j \in B$ to find the point $b_j$ with closest distance to $a_i$.</li>
-<li><strong>Transformation</strong>
-Align point clouds on top of each other.
-Compute centres of mass.
-Compute rotation using Singular Value Decomposition (SVD).</li>
-</ul>
-</li>
-</ul>
-<p><strong>Variants of ICP</strong></p>
-<ul>
-<li><em>Point-to-plane</em> assumes that points are not independent points in space but have been sampled from a surface (plane?). Requires to leave SVD approach and use a general least-squares approach instead. Then use, for example, the Gauss-Newton method to minimise the error under this point-to-plane metric.</li>
-<li><em>Projective ICP</em></li>
-<li>robust kernels (?) to better deal with outliers</li>
-</ul>
-<h3 id="the-basic-alignment-problem">The basic alignment problem</h3>
-<p>Given two input point sets $X = {x_1, &hellip;, x_I}, Y={y_1,&hellip;,y_J}$ with correspondences $C={(i,j)}$, we are looking for translation $t$ and rotation $R$ that minimise the sum of squared errors:</p>
-<p>$$\sum_{(i,j)\in C} ||y_i - Rx_j - t||^2 \rightarrow \min$$</p>
-<h3 id="simplified-correspondences">Simplified correspondences</h3>
-<p>Reorder point clouds $X, Y$ given the correspondences $C$ using an index $n$.</p>
-<p>Point sets ${x_n}, {y_n}$</p>
-<p>Find the rigid body transform</p>
-<p>$$\overline{x}_n = R x_n + t, \quad n\in{1,&hellip;, N}, N := |C|$$</p>
-<p>that transforms points ${x_n}$ into ${\overline{x}_n}$ such that the point set ${\overline{x}_n}$ will be as close as possible to the point set ${y_n}$, i.e. minimising the sum of squared point-to-point distances.</p>
-<h3 id="special-case-of-the-absolute-orientation-problem">Special case of the Absolute Orientation Problem</h3>
-<p>In the absolute orientation problem, we look for the similarity transform</p>
-<p>$$\overline{x}_n = \lambda R \bold{x}_n + \bold{t}$$</p>
-<p>transforming 3D point sets, including a scaling factor $\lambda$. Here, we only need the rigid body transform, meaning we assume $\lambda = 1$.</p>
-<h3 id="formal-problem-definition">Formal problem definition</h3>
-<p>Given corresponding points $x_n, y_n, n \in {1,&hellip;, N}$</p>
-<p>and optionally weights $p_n$</p>
-<p>find the parameters $R, \bold{t}$ of the rigid body transform with</p>
-<p>$$\overline{x}_n = R\bold{x}_n + \bold{t},\quad n\in{1,&hellip;,N}$$</p>
-<p>such that the squared error is minimised</p>
-<p>$$\sum ||\bold{y}_n - \bold{\overline{x}}_n||^2p_n \rightarrow \min$$</p>
-<h3 id="direct-optimal-solutions-exists">Direct optimal solutions exists</h3>
-<p>Assuming perfect known data association, a direct and optimal solution exists.</p>
-<p><strong>Direct</strong>: no initial guess and no iteration required</p>
-<p><strong>Optimal</strong>: no better solution exists</p>
-<p>Informally speaking it</p>
-<ul>
-<li>computes a <em>shift</em> involving the <em>centres of mass</em> of both point clouds</li>
-<li>performs a <em>rotational</em> alignment using SVD</li>
-</ul>
-<h3 id="direct-computation-of-the-rotation-matrix-r">Direct computation of the rotation matrix $R$</h3>
-<p>$$\bold{x}_0 = \frac{\sum \bold{x}_np_n}{\sum p_n} \qquad \bold{y}_0 = \frac{\sum \bold{y}_np_n}{\sum p_n}$$</p>
-<p>Use the weighted means of each point set to calculate a so-called <strong>cross-covariance (or cross-correlation) matrix $H$:</strong></p>
-<p>$$H = \sum(\bold{y}_n - \bold{y}_0)(\bold{x}_n - \bold{x}_0)^T p_n$$</p>
-<p>And then we decompose $H$ into three matrices $U, D,$ and $V.$</p>
-<p>$$\mathrm{svd}(H) = UDV^T$$</p>
-<p>The rotation matrix we&rsquo;re looking for is</p>
-<p>$$R = VU^T$$</p>
-<h3 id="direct-computation-of-the-translation-vector-boldt">Direct computation of the translation vector $\bold{t}$</h3>
-<p>$$t = \bold{y}_0 - R\bold{x}_0$$</p>
-<h3 id="svd-based-alignment">SVD-based alignment</h3>
-<p>Compute mean-reduced coordinates</p>
-<ul>
-<li>$\bold{a}_n = (\bold{y}_n - \bold{y}_0)$</li>
-<li>$\bold{b}_n = (\bold{x}_n - \bold{x}_0)$</li>
-</ul>
-<p>Compute cross-covariance matrix</p>
-<ul>
-<li>$H = \sum \bold{a}_n \bold{b}_n^T p_n$</li>
-</ul>
-<p>Compute SVD</p>
-<ul>
-<li>$\mathrm{svd(H)} = UDV^T$</li>
-</ul>
-<p>Rotation matrix is given by</p>
-<ul>
-<li>$R = UV^T$ (which one is correct, this or the one above??)</li>
-</ul>
-<p>Translation vector is given by</p>
-<ul>
-<li>$t = y_0 - Rx_0$</li>
-</ul>
-<p>Translate and rotate points</p>
-<ul>
-<li>$\overline{x}_n=R x_n + t$</li>
-</ul>
-<h2 id="derivation">Derivation</h2>
+            <description>Derivation Problem definition Let $A = {\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}}, B={\boldsymbol{b_1}, &amp;hellip;, \boldsymbol{b_n}}$ be two point sets in $d$-space, for $d \ge 1$, and suppose that the ICP algorithm aligns $A$ to $B$; that is, $B$ is fixed and $A$ is translated to best fit $B$.
+Here is a graph of an example problem:
+Derivation of optimal translation vector Use local coordinate system To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</description>
+            <content type="html"><![CDATA[<h1 id="derivation">Derivation</h1>
+<h2 id="problem-definition">Problem definition</h2>
+<p>Let $A = {\boldsymbol{a_1}, &hellip;, \boldsymbol{a_m}}, B={\boldsymbol{b_1}, &hellip;, \boldsymbol{b_n}}$ be two point sets in $d$-space, for $d \ge 1$, and suppose that the ICP algorithm aligns $A$ to $B$; that is, $B$ is fixed and $A$ is translated to best fit $B$.</p>
+<p>Here is a graph of an example problem:</p>
+<p><img src="icp_graph_01.svg" alt="icp_graph_01.svg"></p>
+<h2 id="derivation-of-optimal-translation-vector">Derivation of optimal translation vector</h2>
 <h3 id="use-local-coordinate-system">Use local coordinate system</h3>
-<p>We want to use local coordinates defined by the point set ${y_n}$</p>
-<p>We set the origin as the weighted mean of ${y_n}$ computed by</p>
-<p>$$y_0 = \frac{\sum y_np_n}{\sum p_n}$$</p>
-<p>such that we minimise</p>
-<p>$$\sum ||y_n - y_0 - Rx_n - t + y_0||^2 p_n \rightarrow \min$$</p>
+<p>To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</p>
+<p>$$\boldsymbol{b_0} := \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$$</p>
+<p>such that in iteration $i$ we want to find the $\boldsymbol{\Delta t_i}$ that minimises the cost function</p>
+<p>$$\mathrm{RMS}(\boldsymbol{\Delta t_i}) = \frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - \boldsymbol{b_0} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i} + \boldsymbol{b_0}||^2.$$</p>
 <h3 id="rewrite-translation-vector">Rewrite translation vector</h3>
-<p>Start with $\overline{x}_n = Rx_n+t$ and use the shift of the origin $\overline{x}_n - y_0 = Rx_n + t - y_0$ to rewrite the translation vector. Here we exploit the fact that for rotation matrices, $R R^T = I$:</p>
-<p>$$⁍$$</p>
-<p>Introduce a <em><strong>new variable</strong></em> $x_0 = R^T y_0-R^Tt:$</p>
-<p>$$\overline{x}_n-y_0 = R(x_n-x_0)$$</p>
+<p>We introduce a <em><strong>new variable</strong></em> $\boldsymbol{a_0} := \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and can then rewrite the expression of point $\boldsymbol{a}$ translated by the newest translation vector as follows:</p>
+<p>$$(\boldsymbol{a} + \boldsymbol{t_{i-1}}) + \boldsymbol{\Delta t_i} - b_0 = (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - a_0$$</p>
+<p>Note that, while the notation of $\boldsymbol{a_0}$ alludes to a semantic meaning similar to that of $\boldsymbol{b_0}$, it is currently simply defined as $\boldsymbol{b_0} - \boldsymbol{\Delta t_i}$, with no obvious connection to the mean of $A$. The connection will show up as we proceed.</p>
 <h3 id="minimisation">Minimisation</h3>
-<p>Initially formulated problem:</p>
-<p>$$\sum || y_n - \overline{x}_n||^2p_n \rightarrow \min$$</p>
+<p>Our initially formulated minimisation function</p>
+<p>$$\frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i}||^2.$$</p>
 <p>turns into</p>
-<p>$$\sum || y_n - y_0 - R(x_n - x_0)||^2p_n \rightarrow \min$$</p>
-<p>We need to find $R^*, x_0^*$ such that</p>
-<p>$$R^*, x_0^* = \argmin_{R, x_0}\sum || y_n - y_0 - R(x_n - x_0)||^2p_n$$</p>
-<p>Computation:</p>
-<p>$$\begin{aligned}\Phi(x_0, R) \coloneqq \sum &amp;\left[ (y_n -y_0) - R(x_n - x_0) \right]^T\&amp;\left[ (y_n -y_0) - R(x_n - x_0) \right]p_n\cr= \sum &amp;(y_n-y_0)^T(y_n-y_0)p_n &amp;&amp; \text{(no $R, x_0$)}\cr+ \sum &amp;(x_n-x_0)^T(x_n-x_0)p_n&amp;&amp; \text{(no $R$)}\cr- 2\sum &amp;(y_n-y_0)^TR(x_n-x_0)p_n\end{aligned}$$</p>
-<h3 id="minimise-with-regard-to-x_0">Minimise with regard to $x_0$</h3>
+<p>$$\sum_{a_n \in A} || \boldsymbol{N_B(a+t_{i-1})} - b_0 - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) + a_0||^2$$</p>
+<p>We need to find $\boldsymbol{a_0^{*}}$ such that</p>
+<p>$$\boldsymbol{a_0^{<em>}} = \argmin_{a_0}\frac{1}{m}\sum_{\boldsymbol{a} \in A} || (\underbrace{\boldsymbol{N_B(a+t_{i-1}}}_{=:b^{</em>}}) - b_0) - ((\underbrace{\boldsymbol{a} + \boldsymbol{t_{i-1}}}_{=: a^{*}}) - a_0)||^2$$</p>
+<p>We can omit the constant factor $1/m$ as it doesn&rsquo;t affect our minimisation calculations, and expand the loss function $\Phi$ as follows, using the newly introduced variables $\boldsymbol{a^{<em>}}$ and $\boldsymbol{b^{</em>}}$ for clarity:</p>
+<p>$$\begin{aligned}\Phi(\boldsymbol{a_0}) \coloneqq \sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}} &amp;\left[ (\boldsymbol{b^{</em>}} - \boldsymbol{b_0}) - (\boldsymbol{a^{<em>}} - \boldsymbol{a_0}) \right]^T\left[ (\boldsymbol{b^{</em>}} - \boldsymbol{b_0}) - (\boldsymbol{a^{<em>}} - \boldsymbol{a_0}) \right] \cr = \sum_{\boldsymbol{a^{</em>}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{b^{<em>}} - \boldsymbol{b_0})^T(\boldsymbol{b^{</em>}} - \boldsymbol{b_0}) &amp;&amp; \text{(constant)} \cr + \sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{a^{</em>}} - \boldsymbol{a_0})^T(\boldsymbol{a^{<em>}} - \boldsymbol{a_0})&amp;&amp;(</em>) \cr - 2\sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{b^{</em>}} - \boldsymbol{b_0})^T(\boldsymbol{a^{*}} - \boldsymbol{a_0}) &amp;&amp; (**)\end{aligned}$$</p>
+<p>To find the minimum of this convex function we first calculate its first derivative</p>
 <p>$$\begin{aligned}
-\frac{\partial\Phi(x_0, R)}{\partial x_0} = &amp;-2\sum(x_n - x_0)p_n\cr
-&amp;+2\sum R^T(y_n-y_0)p_n
+\frac{\mathrm{d} \Phi}{\mathrm{d} \boldsymbol{a_0}} = &amp;-2\sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}}(\boldsymbol{a^{</em>}} - a_0)&amp;&amp;(<em>)\cr
+&amp;+2\sum_{\boldsymbol{a^{</em>}} \in A + \boldsymbol{t_{i-1}}} (\boldsymbol{b^{*}} - \boldsymbol{b_0}) &amp;&amp; (**)
 \end{aligned}$$</p>
-<p>Setting the first derivative to zero simplifies this to:</p>
-<p>$$\sum(x_n - x_0)p_n = R^T\sum (y_n-y_0)p_n$$</p>
-<p>The right side of this equals zero because $y_0$ is the weighted mean of $y_n$.</p>
-<p>$$\begin{aligned}
-0 = &amp;\sum(x_n-x_0)p_n\cr
-= &amp;\sum x_np_n - x_0\sum p_n
-\end{aligned}$$</p>
-<p>This leads to</p>
-<p>$$x_0 = \frac{\sum x_np_n}{\sum p_n}$$</p>
-<p>which means <strong>the optimal value for $x_0$ is the weighted mean of the points</strong> $x_n$.</p>
-<h3 id="minimise-with-regard-to-r">Minimise with regard to $R$</h3>
-<p>Only the third term of $\Phi(x_0, R)$ depends on $R.$ We therefore need to find the $R$ that maximises</p>
-<p>$$\sum (y_n-y_0)^TR(x_n-x_0)p_n$$</p>
-<p>with the constraint $R^TR = I$.</p>
-<p>Compute mean-reduced coordinates</p>
-<ul>
-<li>$\bold{b}_n = (\bold{y}_n - \bold{y}_0)$</li>
-<li>$\bold{a}_n = (\bold{x}_n - \bold{x}_0)$</li>
-</ul>
-<p>This leads to the compact form</p>
-<p>$$\sum b_n^TRa_np_n$$</p>
-<h3 id="rewrite-using-the-trace">Rewrite using the trace</h3>
-<p>$$\begin{aligned}
-R^* = &amp;\argmax_R \sum b_n^TRa_np_n\cr
-= &amp;\argmax_R \mathrm{tr}(RH)
-\end{aligned}$$</p>
-<p>with the cross-covariance matrix $H = \sum(a_nb_n^T)p_n$</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Thus we need to find $R$ that maximises $\mathrm{tr}(RH)$</p>
-<h3 id="maximisation-using-svd">Maximisation using SVD</h3>
-<p>$$\mathrm{svd}(H) = UDV^T$$</p>
-<p>with  $U^TU = I,\quad V^TV=I,\quad D=\mathrm{diag}(d_i)$.</p>
-<h1 id="resources">Resources</h1>
-<h3 id="icp-lectures">ICP lectures</h3>
-<p><a href="https://www.youtube.com/watch?v=">Iterative Closest Point (ICP) - 5 Minutes with Cyrill</a>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/QWDM4cFdKrE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="Iterative Closest Point (ICP) - 5 Minutes with Cyrill"></iframe>
-</div>
-</p>
-<hr>
-<p><a href="https://www.youtube.com/watch?v=dhzLQfDBx2Q">ICP &amp; Point Cloud Registration - Part 1: Known Data Association &amp; SVD (Cyrill Stachniss, 2021)</a></p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/dhzLQfDBx2Q" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="ICP &amp; Point Cloud Registration - Part 1: Known Data Association &amp; SVD (Cyrill Stachniss, 2021)"></iframe>
-</div>
-
-<hr>
-<p><a href="https://www.youtube.com/watch?v=ktRqKxddjJk">ICP &amp; Point Cloud Registration - Part 2: Unknown Data Association (Cyrill Stachniss, 2021)</a></p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/ktRqKxddjJk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-<hr>
-<p><a href="https://www.youtube.com/watch?v=CJE59i8oxIE">ICP &amp; Point Cloud Registration - Part 3: Non-linear Least Squares (Cyrill Stachniss, 2021)</a></p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/CJE59i8oxIE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-<hr>
-<p><a href="https://www.youtube.com/watch?v=2hC9IG6MFD0">Point-to-Plane and Generalized ICP - 5 Minutes with Cyrill</a></p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/2hC9IG6MFD0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-<hr>
-<h3 id="svd-lectures">SVD lectures</h3>
-<p><a href="https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv">Singular Value Decomposition</a></p>
-<h3 id="papers">Papers</h3>
-<p><a href="Iterative%20Closest%20Point%20(ICP)%20Algorithm%2020211195965c45b5b3af81743be4477f/On_the_ICP_Algorithm.pdf">On the ICP Algorithm.pdf</a></p>
-<p><a href="Iterative%20Closest%20Point%20(ICP)%20Algorithm%2020211195965c45b5b3af81743be4477f/Worst-case_and_Smoothed_Analysis_of_the_ICP_Algorithm_with_an_Application_to_the_k-means_Method.pdf">Worst-case and Smoothed Analysis of the ICP Algorithm, with an Application to the k-means Method.pdf</a></p>
-<p><a href="Iterative%20Closest%20Point%20(ICP)%20Algorithm%2020211195965c45b5b3af81743be4477f/Provably_Approximated_ICP.pdf">Provably Approximated ICP.pdf</a></p>
-<p><a href="Iterative%20Closest%20Point%20(ICP)%20Algorithm%2020211195965c45b5b3af81743be4477f/Efficient_Variants_of_the_ICP_Algorithm.pdf">Efficient Variants of the ICP Algorithm.pdf</a></p>
-<p><a href="Iterative%20Closest%20Point%20(ICP)%20Algorithm%2020211195965c45b5b3af81743be4477f/Geometrically_Stable_Sampling_for_the_ICP_Algorithm.pdf">Geometrically Stable Sampling for the ICP Algorithm.pdf</a></p>
+<p>and set it equal to zero, which simplifies to</p>
+<p>$$\sum_{a \in A}((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}) = \sum_{a \in A} (\boldsymbol{N_B(a+t_{i-1}}) - \boldsymbol{b_0}).$$</p>
+<p>The right side of this equation equals zero because $\boldsymbol{b_0}$ is the mean of $$ all nearest neighbours ${N_B(a+t_{i-1},|, a \in A)}$.</p>
+<p>$$\begin{aligned}0 = &amp;\sum_{a \in A}((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - a_0) \cr = &amp;\sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \sum a_0 \cr = &amp;\sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - m \cdot a_0\cr\implies a_0 = &amp;\frac{1}{m} \sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \end{aligned}$$</p>
+<p>which means <strong>the optimal value for $a_0$ is the weighted mean of the points</strong> $\boldsymbol{a} + \boldsymbol{t_{i-1}}$.</p>
+<p>Since $\boldsymbol{a_0} = \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and $\boldsymbol{b_0} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$ it follows that</p>
+<p>$$\begin{aligned}\boldsymbol{\Delta t_i} = &amp; \boldsymbol{b_0} - \boldsymbol{a_0} \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}}) - \frac{1}{m} \sum_{\boldsymbol{a} \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a + t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right) \end{aligned}$$</p>
+<p>That means the optimal translation vector is the vector from the mean of  $$$A$ to the mean of all points marked as nearest neighbours in $B$.</p>
 ]]></content>
         </item>
         

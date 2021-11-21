@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chris Offner</title>
-    <link>https://chrisoffner.github.io/studynotes/</link>
-    <description>Recent content on Chris Offner</description>
+    <title>icp on Chris Offner</title>
+    <link>https://chrisoffner.github.io/studynotes/tags/icp/</link>
+    <description>Recent content in icp on Chris Offner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 21 Nov 2021 19:08:00 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 19:08:00 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/tags/icp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deriving the optimal ICP translation</title>
       <link>https://chrisoffner.github.io/studynotes/posts/2021/11/deriving-the-optimal-icp-translation/</link>
@@ -29,17 +29,6 @@ Proof Follows using easy algebraic manipulations, based on the obvious equality 
       <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/illustrating-icp-in-one-dimension/</guid>
       <description>To get a better intuition of what the iterative closest point (ICP) algorithm does, let&amp;rsquo;s look at a visual representation of its simplest form – the one-dimensional case which is only concerned with translation, but not rotation.
 Problem definition Let $A = \{{\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}\}}, B = \{{\boldsymbol{b_1}, &amp;hellip;, \boldsymbol{b_n} \}}$ be two point sets in $d$-space, in the following illustration $d = 1$, and suppose that the ICP algorithm aligns $A$ to $B$, i.</description>
-    </item>
-    
-    <item>
-      <title>Introduction to ICP</title>
-      <link>https://chrisoffner.github.io/studynotes/posts/2021/11/introduction-to-icp/</link>
-      <pubDate>Wed, 10 Nov 2021 18:32:00 +0100</pubDate>
-      
-      <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/introduction-to-icp/</guid>
-      <description>Derivation Problem definition Let $A = {\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}}, B={\boldsymbol{b_1}, &amp;hellip;, \boldsymbol{b_n}}$ be two point sets in $d$-space, for $d \ge 1$, and suppose that the ICP algorithm aligns $A$ to $B$; that is, $B$ is fixed and $A$ is translated to best fit $B$.
-Here is a graph of an example problem:
-Derivation of optimal translation vector Use local coordinate system To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</description>
     </item>
     
   </channel>
