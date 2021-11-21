@@ -69,7 +69,7 @@ Follows using easy algebraic manipulations, based on the obvious equality that f
         <item>
             <title>Illustrating ICP in one dimension</title>
             <link>https://chrisoffner.github.io/studynotes/posts/2021/11/illustrating-icp-in-one-dimension/</link>
-            <pubDate>Sun, 21 Nov 2021 16:35:48 +0100</pubDate>
+            <pubDate>Sat, 20 Nov 2021 16:35:48 +0100</pubDate>
             
             <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/illustrating-icp-in-one-dimension/</guid>
             <description>To get a better intuition of what the iterative closest point (ICP) algorithm does, let&amp;rsquo;s look at a visual representation of its simplest form – the one-dimensional case which is only concerned with translation, but not rotation.
@@ -108,55 +108,6 @@ Problem definition Let $A = \{{\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}\
 <p>In the end, $A + \boldsymbol{t_4}$ rests in the optimal position so that $\boldsymbol{\Delta t_5} = 0$ and the algorithm terminates.</p>
 <p><img src="/images/icp_graph_05.svg" alt="icp_graph_05.svg"></p>
 <p>Next up we will derive the optimal relative translation vector $\boldsymbol{\Delta t_i}$ at every step.</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Introduction to ICP</title>
-            <link>https://chrisoffner.github.io/studynotes/posts/2021/11/introduction-to-icp/</link>
-            <pubDate>Wed, 10 Nov 2021 18:32:00 +0100</pubDate>
-            
-            <guid>https://chrisoffner.github.io/studynotes/posts/2021/11/introduction-to-icp/</guid>
-            <description>Derivation Problem definition Let $A = {\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}}, B={\boldsymbol{b_1}, &amp;hellip;, \boldsymbol{b_n}}$ be two point sets in $d$-space, for $d \ge 1$, and suppose that the ICP algorithm aligns $A$ to $B$; that is, $B$ is fixed and $A$ is translated to best fit $B$.
-Here is a graph of an example problem:
-Derivation of optimal translation vector Use local coordinate system To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</description>
-            <content type="html"><![CDATA[<h1 id="derivation">Derivation</h1>
-<h2 id="problem-definition">Problem definition</h2>
-<p>Let $A = {\boldsymbol{a_1}, &hellip;, \boldsymbol{a_m}}, B={\boldsymbol{b_1}, &hellip;, \boldsymbol{b_n}}$ be two point sets in $d$-space, for $d \ge 1$, and suppose that the ICP algorithm aligns $A$ to $B$; that is, $B$ is fixed and $A$ is translated to best fit $B$.</p>
-<p>Here is a graph of an example problem:</p>
-<p><img src="icp_graph_01.svg" alt="icp_graph_01.svg"></p>
-<h2 id="derivation-of-optimal-translation-vector">Derivation of optimal translation vector</h2>
-<h3 id="use-local-coordinate-system">Use local coordinate system</h3>
-<p>To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</p>
-<p>$$\boldsymbol{b_0} := \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$$</p>
-<p>such that in iteration $i$ we want to find the $\boldsymbol{\Delta t_i}$ that minimises the cost function</p>
-<p>$$\mathrm{RMS}(\boldsymbol{\Delta t_i}) = \frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - \boldsymbol{b_0} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i} + \boldsymbol{b_0}||^2.$$</p>
-<h3 id="rewrite-translation-vector">Rewrite translation vector</h3>
-<p>We introduce a <em><strong>new variable</strong></em> $\boldsymbol{a_0} := \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and can then rewrite the expression of point $\boldsymbol{a}$ translated by the newest translation vector as follows:</p>
-<p>$$(\boldsymbol{a} + \boldsymbol{t_{i-1}}) + \boldsymbol{\Delta t_i} - b_0 = (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - a_0$$</p>
-<p>Note that, while the notation of $\boldsymbol{a_0}$ alludes to a semantic meaning similar to that of $\boldsymbol{b_0}$, it is currently simply defined as $\boldsymbol{b_0} - \boldsymbol{\Delta t_i}$, with no obvious connection to the mean of $A$. The connection will show up as we proceed.</p>
-<h3 id="minimisation">Minimisation</h3>
-<p>Our initially formulated minimisation function</p>
-<p>$$\frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i}||^2.$$</p>
-<p>turns into</p>
-<p>$$\sum_{a_n \in A} || \boldsymbol{N_B(a+t_{i-1})} - b_0 - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) + a_0||^2$$</p>
-<p>We need to find $\boldsymbol{a_0^{*}}$ such that</p>
-<p>$$\boldsymbol{a_0^{<em>}} = \argmin_{a_0}\frac{1}{m}\sum_{\boldsymbol{a} \in A} || (\underbrace{\boldsymbol{N_B(a+t_{i-1}}}_{=:b^{</em>}}) - b_0) - ((\underbrace{\boldsymbol{a} + \boldsymbol{t_{i-1}}}_{=: a^{*}}) - a_0)||^2$$</p>
-<p>We can omit the constant factor $1/m$ as it doesn&rsquo;t affect our minimisation calculations, and expand the loss function $\Phi$ as follows, using the newly introduced variables $\boldsymbol{a^{<em>}}$ and $\boldsymbol{b^{</em>}}$ for clarity:</p>
-<p>$$\begin{aligned}\Phi(\boldsymbol{a_0}) \coloneqq \sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}} &amp;\left[ (\boldsymbol{b^{</em>}} - \boldsymbol{b_0}) - (\boldsymbol{a^{<em>}} - \boldsymbol{a_0}) \right]^T\left[ (\boldsymbol{b^{</em>}} - \boldsymbol{b_0}) - (\boldsymbol{a^{<em>}} - \boldsymbol{a_0}) \right] \cr = \sum_{\boldsymbol{a^{</em>}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{b^{<em>}} - \boldsymbol{b_0})^T(\boldsymbol{b^{</em>}} - \boldsymbol{b_0}) &amp;&amp; \text{(constant)} \cr + \sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{a^{</em>}} - \boldsymbol{a_0})^T(\boldsymbol{a^{<em>}} - \boldsymbol{a_0})&amp;&amp;(</em>) \cr - 2\sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}} &amp;(\boldsymbol{b^{</em>}} - \boldsymbol{b_0})^T(\boldsymbol{a^{*}} - \boldsymbol{a_0}) &amp;&amp; (**)\end{aligned}$$</p>
-<p>To find the minimum of this convex function we first calculate its first derivative</p>
-<p>$$\begin{aligned}
-\frac{\mathrm{d} \Phi}{\mathrm{d} \boldsymbol{a_0}} = &amp;-2\sum_{\boldsymbol{a^{<em>}} \in A + \boldsymbol{t_{i-1}}}(\boldsymbol{a^{</em>}} - a_0)&amp;&amp;(<em>)\cr
-&amp;+2\sum_{\boldsymbol{a^{</em>}} \in A + \boldsymbol{t_{i-1}}} (\boldsymbol{b^{*}} - \boldsymbol{b_0}) &amp;&amp; (**)
-\end{aligned}$$</p>
-<p>and set it equal to zero, which simplifies to</p>
-<p>$$\sum_{a \in A}((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}) = \sum_{a \in A} (\boldsymbol{N_B(a+t_{i-1}}) - \boldsymbol{b_0}).$$</p>
-<p>The right side of this equation equals zero because $\boldsymbol{b_0}$ is the mean of $$ all nearest neighbours ${N_B(a+t_{i-1},|, a \in A)}$.</p>
-<p>$$\begin{aligned}0 = &amp;\sum_{a \in A}((\boldsymbol{a} + \boldsymbol{t_{i-1}}) - a_0) \cr = &amp;\sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \sum a_0 \cr = &amp;\sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - m \cdot a_0\cr\implies a_0 = &amp;\frac{1}{m} \sum_{a \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \end{aligned}$$</p>
-<p>which means <strong>the optimal value for $a_0$ is the weighted mean of the points</strong> $\boldsymbol{a} + \boldsymbol{t_{i-1}}$.</p>
-<p>Since $\boldsymbol{a_0} = \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and $\boldsymbol{b_0} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$ it follows that</p>
-<p>$$\begin{aligned}\boldsymbol{\Delta t_i} = &amp; \boldsymbol{b_0} - \boldsymbol{a_0} \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}}) - \frac{1}{m} \sum_{\boldsymbol{a} \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a + t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right) \end{aligned}$$</p>
-<p>That means the optimal translation vector is the vector from the mean of  $$$A$ to the mean of all points marked as nearest neighbours in $B$.</p>
 ]]></content>
         </item>
         
