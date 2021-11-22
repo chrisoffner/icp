@@ -51,7 +51,7 @@ $$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\b
 where $\boldsymbol{t_j} = \sum_{k=1}^j \boldsymbol{\Delta t_k}.$
 Proof Follows using easy algebraic manipulations, based on the obvious equality that follows by construction"><meta itemprop="datePublished" content="2021-11-21T19:08:00+01:00" />
 <meta itemprop="dateModified" content="2021-11-21T19:08:00+01:00" />
-<meta itemprop="wordCount" content="663"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="870"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="icp,algorithm,visualisation," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
@@ -192,15 +192,16 @@ Follows using easy algebraic manipulations, based on the obvious equality that f
 <p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right)$$</p>
 </blockquote>
 <p>Unfortunately this supposedly <em>&ldquo;obvious equality&rdquo;</em>  wasn&rsquo;t quite so obvious to me, and neither were the &ldquo;<em>easy</em> algebraic manipulations&rdquo; that would prove the lemma.</p>
-<p>Only after working through Cyrill Stachniss' great <a href="https://www.youtube.com/watch?v=dhzLQfDBx2Q"><em>lecture</em></a> on the topic was I able to derive this &ldquo;obvious&rdquo; equality, as follows.</p>
+<p>Only after working through Cyrill Stachniss' great <a href="https://www.youtube.com/watch?v=dhzLQfDBx2Q"><em>lecture</em></a> on the topic was I able to derive this &ldquo;obvious&rdquo; equality, and then do the algebraic manipulations that would allow me to arrive at this lemma.</p>
+<h2 id="getting-to-the-starting-point">Getting to the starting point</h2>
 <h3 id="use-local-coordinate-system">Use local coordinate system</h3>
 <p>To simplify notation we want to use the local coordinates defined by the point set $B$ and set the origin as the mean of $B$:</p>
 <p>$$\boldsymbol{b_0} := \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$$</p>
-<p>such that in iteration $i$ we want to find the $\boldsymbol{\Delta t_i}$ that minimises the cost function</p>
+<p>Adding and subtracting this $\boldsymbol{b_0}$ to our $\mathrm{RMS}$ cost function does not change it, so that in every iteration $i$ we want to find the $\boldsymbol{\Delta t_i}$ that minimises</p>
 <p>$$\mathrm{RMS}(\boldsymbol{\Delta t_i}) = \frac{1}{m}\sum_{a \in A} ||\boldsymbol{N_B(a+t_{i-1})} - \boldsymbol{b_0} - (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{\Delta t_i} + \boldsymbol{b_0}||^2.$$</p>
 <h3 id="rewrite-translation-vector">Rewrite translation vector</h3>
-<p>We introduce a <em><strong>new variable</strong></em> $\boldsymbol{a_0} := \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and can then rewrite the expression of point $\boldsymbol{a}$ translated by the newest translation vector:</p>
-<p>$$(\boldsymbol{a} + \boldsymbol{t_{i-1}}) + \boldsymbol{\Delta t_i} - \boldsymbol{b_0} = (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}$$</p>
+<p>We introduce a <em><strong>new variable</strong></em> $\boldsymbol{a_0} := \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and can then rewrite the expression of point $\boldsymbol{a}$ translated by the newest translation vector as</p>
+<p>$$(\boldsymbol{a} + \boldsymbol{t_{i-1}}) + \boldsymbol{\Delta t_i} - \boldsymbol{b_0} = (\boldsymbol{a} + \boldsymbol{t_{i-1}}) - \boldsymbol{a_0}.$$</p>
 <p>Note that, while the notation of $\boldsymbol{a_0}$ alludes to a semantic meaning similar to that of $\boldsymbol{b_0}$, it is currently simply defined as $\boldsymbol{b_0} - \boldsymbol{\Delta t_i}$, with no obvious connection to the mean of $A$. The connection will show up as we proceed.</p>
 <h3 id="minimisation">Minimisation</h3>
 <p>Our initially formulated minimisation function</p>
@@ -224,6 +225,12 @@ Follows using easy algebraic manipulations, based on the obvious equality that f
 <p>Since $\boldsymbol{a_0} = \boldsymbol{b_0} - \boldsymbol{\Delta t_i}$ and $\boldsymbol{b_0} = \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}})$ it follows that</p>
 <p>$$\begin{aligned}\boldsymbol{\Delta t_i} = &amp; \boldsymbol{b_0} - \boldsymbol{a_0} \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a + t_{i-1}}) - \frac{1}{m} \sum_{\boldsymbol{a} \in A} (\boldsymbol{a} + \boldsymbol{t_{i-1}}) \cr = &amp;\frac{1}{m} \sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a + t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right) \end{aligned}$$</p>
 <p>The optimal translation vector is therefore the mean of differences between points marked as nearest neighbours in $B$ and their corresponding points in $A + \boldsymbol{t_{i-1}}$.</p>
+<h2 id="proving-the-lemma">Proving the lemma</h2>
+<p>Using this equality we can finally perform the algebraic manipulation that leads us to the lemma, starting with a simple index shift:</p>
+<p>$$\begin{aligned}
+&amp;&amp;\boldsymbol{\Delta t_{i-1}} &amp;= \frac{1}{m} \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}}) - (\boldsymbol{a} + \boldsymbol{t_{i-2}}) \cr
+\implies&amp;&amp;m\boldsymbol{\Delta t_{i-1}} &amp;=  \sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}}) - \sum_{\boldsymbol{a} \in A}(\boldsymbol{a} + \boldsymbol{t_{i-2}}) \cr\implies&amp;&amp;\sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}}) &amp;= \sum_{\boldsymbol{a} \in A}(\boldsymbol{a} + \boldsymbol{t_{i-2}}) + m\boldsymbol{\Delta t_{i-1}}\cr\implies&amp;&amp;\sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}}) &amp;= \sum_{\boldsymbol{a} \in A}(\boldsymbol{a} + \boldsymbol{t_{i-2}}) + \sum_{\boldsymbol{a} \in A}\boldsymbol{\Delta t_{i-1}}\cr\implies&amp;&amp;\sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}}) &amp;= \sum_{\boldsymbol{a} \in A}(\boldsymbol{a} + \boldsymbol{t_{i-2}} + \boldsymbol{\Delta t_{i-1}})\cr\implies&amp;&amp;\sum_{\boldsymbol{a} \in A} N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}}) &amp;= \sum_{\boldsymbol{a} \in A}(\boldsymbol{a} + \boldsymbol{t_{i-1}})\cr\implies&amp;&amp;\frac{1}{m}\sum_{\boldsymbol{a} \in A} \left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})\right) &amp;= \underbrace{\frac{1}{m}\sum_{\boldsymbol{a} \in A}\left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) -(\boldsymbol{a} + \boldsymbol{t_{i-1}})\right)}_{=\boldsymbol{\Delta t_i}}\end{aligned}$$</p>
+<p>Thanks to the previously derived equality we know the right side is $\boldsymbol{\Delta t_i}$, and can therefore confirm that the optimal relative translation for every iteration $i \ge 2$ is the mean difference between the current and previous nearest neighbour of each point in $A$.</p>
 
       </div>
     </article>
