@@ -138,7 +138,7 @@ a_2 + t_3 &amp;= a_2 + \Delta t_1 + \Delta t_2 + \Delta t_3 \cr
 </blockquote>
 <p>This holds because $\Delta t_2 = \frac{n - 1}{n} = \frac{j}{n}$.</p>
 <blockquote>
-<p><em>$\boldsymbol{(ii)}$ At each iteration in round $j$, other than the last one, the overall number of points of $A$ that cross $\beta_{n-j+1}$ is exactly $j$, and no point crosses any other boundary.</em> {#computation1}</p>
+<p><em>$\boldsymbol{(ii)}$ At each iteration in round $j$, other than the last one, the overall number of points of $A$ that cross $\beta_{n-j+1}$ is exactly $j$, and no point crosses any other boundary.</em></p>
 </blockquote>
 <p>As in the previous case $j = n$, claim $\boldsymbol{(ii)}$ is trivially true because round $j = n - 1$ consists of only a single iteration.</p>
 <hr>
@@ -187,7 +187,7 @@ a_2 + t_3 &amp;= a_2 + \Delta t_1 + \Delta t_2 + \Delta t_3 \cr
 &amp;= \frac{1}{n} \left(n + \frac{n-1}{2} -\frac{1}{n}\sum_{i=1}^{n-1} i \right) \cr
 &amp;= \frac{1}{n} \left(n + \frac{n-1}{2} -\frac{1}{2n} (n-1)n \right) \cr
 &amp;= \frac{1}{n} \left(n + \cancel{\frac{n-1}{2}} -\cancel{\frac{n-1}{2}} \right) \cr
-&amp;= \frac{1}{n} \left(n\right) = 1
+&amp;= \frac{n}{n} = 1
 \end{aligned}$$</p>
 <hr>
 <h3 id="-distance-of--boldsymbola_2--t_2-from-the-left-boundary-of--boldsymbolmathcalvb_3">🧮 Distance of $\, \boldsymbol{a_2 + t_2}\,$ from the left boundary of $\, \boldsymbol{\mathcal{V}(b_3)}$</h3>
