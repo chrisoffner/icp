@@ -69,7 +69,7 @@ These notes are still very much incomplete and a work in progress.
 <p>$B$ consists of the points $b_i = i-1$, for $i=1,&hellip;,n$.</p>
 <p>Initially, all points of $A$ are assigned to $b_1$. As the algorithm progresses, it keeps translating $A$ to the right.</p>
 <p>Since we mostly ignore the point $a_1$ for this proof, we define $A' := A \backslash \{a_1\} = \{a_2, &hellip;, a_n\}$.</p>
-<p>The first translation satisfies $\Delta t_1 = 1$ (🧮<a href="#first-translation--boldsymboldelta-t_1">computation</a>), which implies that after the first iteration of the algorithm, all points of $A'$ are assigned to $b_2$.</p>
+<p>The first translation satisfies $\Delta t_1 = 1$ (🧮<a href="#-first-translation--boldsymboldelta-t_1">computation</a>), which implies that after the first iteration of the algorithm, all points of $A'$ are assigned to $b_2$.</p>
 <p>Using</p>
 <p>$$\Delta t_i = \frac{1}{m} \sum_{a\in A}\left(N_B(a + t_{i-1}) - N_B(a + t_{i-2})\right), \qquad(2)$$</p>
 <p>we have</p>
