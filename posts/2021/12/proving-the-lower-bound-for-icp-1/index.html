@@ -7,7 +7,7 @@
 <meta name="author" content="Chris Offner ">
 <meta name="description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-Question about theorem 4.1    Which points contribute to the translation? $$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} &#43; \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} &#43;\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation, i." />
+🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$." />
 <meta name="keywords" content=", icp, algorithm, visualisation" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -45,9 +45,9 @@ Question about theorem 4.1    Which points contribute to the translation? $$\bol
 <meta itemprop="name" content="Proving the lower bound for ICP 1">
 <meta itemprop="description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-Question about theorem 4.1    Which points contribute to the translation? $$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} &#43; \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} &#43;\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation, i."><meta itemprop="datePublished" content="2021-12-12T10:58:57+01:00" />
+🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."><meta itemprop="datePublished" content="2021-12-12T10:58:57+01:00" />
 <meta itemprop="dateModified" content="2021-12-12T10:58:57+01:00" />
-<meta itemprop="wordCount" content="2080"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="2308"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="icp,algorithm,visualisation," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
@@ -55,7 +55,7 @@ Question about theorem 4.1    Which points contribute to the translation? $$\bol
 <meta name="twitter:title" content="Proving the lower bound for ICP 1"/>
 <meta name="twitter:description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-Question about theorem 4.1    Which points contribute to the translation? $$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} &#43; \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} &#43;\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation, i."/>
+🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."/>
 
 
 
@@ -63,7 +63,7 @@ Question about theorem 4.1    Which points contribute to the translation? $$\bol
     <meta property="og:title" content="Proving the lower bound for ICP 1" />
 <meta property="og:description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-Question about theorem 4.1    Which points contribute to the translation? $$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} &#43; \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} &#43;\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation, i." />
+🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/" /><meta property="og:image" content="https://chrisoffner.github.io/studynotes/"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-12T10:58:57+01:00" />
@@ -176,12 +176,42 @@ Question about theorem 4.1    Which points contribute to the translation? $$\bol
         <h2 id="-disclaimer-">⚠️ Disclaimer ⚠️</h2>
 <p>These are my study notes for theorem 4.1 of <a href="https://www.sciencedirect.com/science/article/pii/S0925772108000217">On the performance of the ICP algorithm</a> by Ezra et al. in which I try to retrace their proof.</p>
 <p>These notes are still very much incomplete and a work in progress.</p>
-<h3 id="question-about-theorem-41">Question about theorem 4.1</h3>
+<h3 id="-question-about-theorem-41-">🤔 Question about theorem 4.1 🤔</h3>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/aA4yMXN8SG4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
+<h3 id="-question-about-what-seems-like-a-contradiction-">🤔 Question about what seems like a contradiction 🤔</h3>
+<ul>
+<li>
+<p>Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</p>
+</li>
+<li>
+<p>$\boldsymbol{(ii)}:$ In each iteration in round $j$, other than the last one, the overall number of points of $A$ that cross $\beta_{n-j+1}$ is exactly $j$, and no point crosses any other boundary</p>
+</li>
+<li>
+<p>$\boldsymbol{(iii)}:$ In the last iteration of round $j$, the overall number of points of $A$ that cross either $\beta_{n-j+1}$ or  $\beta_{n-j+2}$ is exactly $j-1$.</p>
+</li>
+<li>
+<p>In the last iteration of round $j$, all the points of $A' := \{a_2, &hellip;, a_n\}$, except $l$ of them, have crossed $\beta_{n-j+1}$ in previous iterations.</p>
+</li>
+<li>
+<p>So in this last iteration of round $j$, exactly $l &gt; 0$ points need to cross $\beta_{n-j+1}$, otherwise it wouldn&rsquo;t be the last iteration of round $j$, and exactly $j - 1$ points cross <em>any</em> boundary.</p>
+</li>
+<li>
+<p>If in this last iteration of round $j$, any points cross $\beta_{n-j+2}$, this iteration is then also the <em>first iteration</em> of the next round, $j - 1$.</p>
+</li>
+<li>
+<p>$\boldsymbol{(ii)}$ demands that means exactly $j-1$ points need to cross $\beta_{n-j+2}$ in this iteration.</p>
+</li>
+<li>
+<p>But that leaves none of the $j-1$ possible boundary crossings for the $l$ points supposedly still on the left of $\beta_{n-j+1}$, i.e. only $l = 0$ is possible.</p>
+</li>
+<li>
+<p>Isn&rsquo;t this a contradiction? ⚡️</p>
+</li>
+</ul>
 <hr>
 <h2 id="which-points-contribute-to-the-translation">Which points contribute to the translation?</h2>
 <p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation,  i.e. all $a$ for which $N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) =  N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})$, does not contribute to $\boldsymbol{\Delta t_i}$.</p>
@@ -233,7 +263,7 @@ a_2 + t_3 &amp;= a_2 + \Delta t_1 + \Delta t_2 + \Delta t_3 \cr
 <ul>
 <li>$\boldsymbol{(i)}$ at each such iteration the relative translation is $\frac{j}{n}$,</li>
 <li>$\boldsymbol{(ii)}$ at each iteration in this round, other than the last one, the overall number of points of $A$ that cross $\beta_{n-j+1}$ is exactly $j$, and no point crosses any other boundary, and</li>
-<li>$\boldsymbol{(iii)}$ at the last iteration of the round, the overall number of points of $A$ that cross either  $\beta_{n-j+1}$ or  $\beta_{n-j+2}$ is exactly $j-1$.</li>
+<li>$\boldsymbol{(iii)}$ at the last iteration of the round, the overall number of points of $A$ that cross either $\beta_{n-j+1}$ or  $\beta_{n-j+2}$ is exactly $j-1$.</li>
 </ul>
 <p>In fact, in the induction step we assume that properties $\boldsymbol{(i)}, \boldsymbol{(ii)}$ hold, and then show that property $\boldsymbol{(iii)}$ follows, for $j$, and that $\boldsymbol{(i)}$ and $\boldsymbol{(ii)}$ hold for $j-1$.</p>
 <p>To prove this property, we first note, using $$\boldsymbol{\Delta t_i} = \frac{1}{n} \underbrace{\sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))}_{k},\qquad(2)$$ that the relative translation at each iteration of the algorithm is $\frac{k}{n}$, where for iterations $i \ge 2$, $k$ is an integer $1 \le k \le n$ equal to the number of points in $A$ that have changed their nearest neighbour in the last iteration, and $k=n$ for $i=1$.</p>
