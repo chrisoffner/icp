@@ -83,6 +83,7 @@ a_2 + t_3 &amp;= a_2 + \Delta t_1 + \Delta t_2 + \Delta t_3 \cr
 <p>In fact, in the induction step we assume that properties $\boldsymbol{(i)}, \boldsymbol{(ii)}$ hold, and then show that property $\boldsymbol{(iii)}$ follows, for $j$, and that $\boldsymbol{(i)}$ and $\boldsymbol{(ii)}$ hold for $j-1$.</p>
 <p>To prove this property, we first note, using $$\boldsymbol{\Delta t_i} = \frac{1}{n} \underbrace{\sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))}_{k},\qquad(2)$$ that the relative translation at each iteration of the algorithm is $\frac{k}{n}$, where for iterations $i \ge 2$, $k$ is an integer $1 \le k \le n$ equal to the number of points in $A$ that have changed their nearest neighbour in the last iteration, and $k=n$ for $i=1$.</p>
 <p>The preceding discussion shows that the induction hypothesis holds for $j = n$ and $j = n - 1$.</p>
+<p>Let&rsquo;s go over it again explicitly though:</p>
 <h2 id="base-cases">Base cases</h2>
 <hr>
 <h3 id="case-boldsymbolj--n">Case $\,\boldsymbol{j = n}$</h3>
