@@ -48,7 +48,7 @@ These notes are still very much incomplete and a work in progress.
 <p>If in this last iteration of round $j$, any points cross $\beta_{n-j+2}$, this iteration is then also the <em>first iteration</em> of the next round, $j - 1$.</p>
 </li>
 <li>
-<p>$\boldsymbol{(ii)}$ demands that means exactly $j-1$ points need to cross $\beta_{n-j+2}$ in this iteration.</p>
+<p>$\boldsymbol{(ii)}$ demands that exactly $j-1$ points need to cross $\beta_{n-j+2}$ in this iteration.</p>
 </li>
 <li>
 <p>But that leaves none of the $j-1$ possible boundary crossings for the $l$ points supposedly still on the left of $\beta_{n-j+1}$, i.e. only $l = 0$ is possible.</p>
