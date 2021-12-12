@@ -47,7 +47,7 @@ These notes are still very much incomplete and a work in progress.
 These notes are still very much incomplete and a work in progress.
 🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."><meta itemprop="datePublished" content="2021-12-12T10:58:57+01:00" />
 <meta itemprop="dateModified" content="2021-12-12T10:58:57+01:00" />
-<meta itemprop="wordCount" content="2306"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="2354"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="icp,algorithm,visualisation," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
@@ -212,6 +212,9 @@ These notes are still very much incomplete and a work in progress.
 <p>Isn&rsquo;t this a contradiction? ⚡️</p>
 </li>
 </ul>
+<p>Here are the iterations 1-5 from the video as still images, using $n = 6$ and $\delta = \frac{1}{2n}$.</p>
+<p><img src="https://chrisoffner.github.io/studynotes/images/icp1d_contradiction_iterations.svg" alt="Image"></p>
+<p>Iteration 4 is both the last iteration of round $4$ and the first iteration of round $3$, but only two points, $a_5$ and $a_6$ cross $\beta_{4}$ in this iteration.</p>
 <hr>
 <h2 id="which-points-contribute-to-the-translation">Which points contribute to the translation?</h2>
 <p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation,  i.e. all $a$ for which $N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) =  N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})$, does not contribute to $\boldsymbol{\Delta t_i}$.</p>

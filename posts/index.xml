@@ -57,6 +57,9 @@ These notes are still very much incomplete and a work in progress.
 <p>Isn&rsquo;t this a contradiction? ⚡️</p>
 </li>
 </ul>
+<p>Here are the iterations 1-5 from the video as still images, using $n = 6$ and $\delta = \frac{1}{2n}$.</p>
+<p><img src="/images/icp1d_contradiction_iterations.svg" alt="Image"></p>
+<p>Iteration 4 is both the last iteration of round $4$ and the first iteration of round $3$, but only two points, $a_5$ and $a_6$ cross $\beta_{4}$ in this iteration.</p>
 <hr>
 <h2 id="which-points-contribute-to-the-translation">Which points contribute to the translation?</h2>
 <p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation,  i.e. all $a$ for which $N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) =  N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})$, does not contribute to $\boldsymbol{\Delta t_i}$.</p>
