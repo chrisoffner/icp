@@ -7,7 +7,7 @@
 <meta name="author" content="Chris Offner ">
 <meta name="description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$." />
+🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$." />
 <meta name="keywords" content=", icp, algorithm, visualisation" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -45,9 +45,9 @@ These notes are still very much incomplete and a work in progress.
 <meta itemprop="name" content="Proving the lower bound for ICP 1">
 <meta itemprop="description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."><meta itemprop="datePublished" content="2021-12-12T10:58:57+01:00" />
+🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."><meta itemprop="datePublished" content="2021-12-12T10:58:57+01:00" />
 <meta itemprop="dateModified" content="2021-12-12T10:58:57+01:00" />
-<meta itemprop="wordCount" content="2308"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="2305"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="icp,algorithm,visualisation," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
@@ -55,7 +55,7 @@ These notes are still very much incomplete and a work in progress.
 <meta name="twitter:title" content="Proving the lower bound for ICP 1"/>
 <meta name="twitter:description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."/>
+🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$."/>
 
 
 
@@ -63,7 +63,7 @@ These notes are still very much incomplete and a work in progress.
     <meta property="og:title" content="Proving the lower bound for ICP 1" />
 <meta property="og:description" content="⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$." />
+🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j&#43;1}$ of the cells $\mathcal{V}(b_{n-j&#43;1}), \mathcal{V}(b_{n-j&#43;2})$." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/" /><meta property="og:image" content="https://chrisoffner.github.io/studynotes/"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-12T10:58:57+01:00" />
@@ -182,7 +182,7 @@ These notes are still very much incomplete and a work in progress.
   <iframe src="https://www.youtube.com/embed/aA4yMXN8SG4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<h3 id="-question-about-what-seems-like-a-contradiction-">🤔 Question about what seems like a contradiction 🤔</h3>
+<h3 id="-question-about-seeming-contradiction-">🤔 Question about seeming contradiction 🤔</h3>
 <ul>
 <li>
 <p>Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</p>

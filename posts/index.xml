@@ -17,7 +17,7 @@
             <guid>https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/</guid>
             <description>⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</description>
+🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</description>
             <content type="html"><![CDATA[<h2 id="-disclaimer-">⚠️ Disclaimer ⚠️</h2>
 <p>These are my study notes for theorem 4.1 of <a href="https://www.sciencedirect.com/science/article/pii/S0925772108000217">On the performance of the ICP algorithm</a> by Ezra et al. in which I try to retrace their proof.</p>
 <p>These notes are still very much incomplete and a work in progress.</p>
@@ -27,7 +27,7 @@ These notes are still very much incomplete and a work in progress.
   <iframe src="https://www.youtube.com/embed/aA4yMXN8SG4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<h3 id="-question-about-what-seems-like-a-contradiction-">🤔 Question about what seems like a contradiction 🤔</h3>
+<h3 id="-question-about-seeming-contradiction-">🤔 Question about seeming contradiction 🤔</h3>
 <ul>
 <li>
 <p>Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</p>

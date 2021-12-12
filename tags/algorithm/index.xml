@@ -16,7 +16,7 @@
       <guid>https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/</guid>
       <description>⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
 These notes are still very much incomplete and a work in progress.
-🤔 Question about theorem 4.1 🤔   🤔 Question about what seems like a contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</description>
+🤔 Question about theorem 4.1 🤔   🤔 Question about seeming contradiction 🤔   Round $j$ ist the sequence of all iterations, in which any points of $A$ cross the common Voronoi boundary $\beta_{n-j+1}$ of the cells $\mathcal{V}(b_{n-j+1}), \mathcal{V}(b_{n-j+2})$.</description>
     </item>
     
     <item>
