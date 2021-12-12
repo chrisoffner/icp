@@ -192,24 +192,24 @@ a_2 + t_3 &amp;= a_2 + \Delta t_1 + \Delta t_2 + \Delta t_3 \cr
 <hr>
 <h3 id="-distance-of--boldsymbola_2--t_2-from-the-left-boundary-of--boldsymbolmathcalvb_3">🧮 Distance of $\, \boldsymbol{a_2 + t_2}\,$ from the left boundary of $\, \boldsymbol{\mathcal{V}(b_3)}$</h3>
 <p>$$\begin{aligned}
-(a_2 + \boldsymbol{t}_2) - \inf\mathcal{V}(b_3) = &amp;\frac{2(2-1) - n}{2n} + \delta + 1 + \frac{n-1}{n} - 1.5 \cr
+(a_2 + t_2) - \inf\mathcal{V}(b_3) = &amp;\frac{2(2-1) - n}{2n} + \delta + 1 + \frac{n-1}{n} - 1.5 \cr
 = &amp;\frac{2 - n}{2n} + \frac{n-1}{n} + \delta - 0.5 \cr
 = &amp;\frac{2 - n + 2(n-1)}{2n} + \delta - 0.5 \cr
 = &amp;\frac{1}{2} + \delta - 0.5 \cr
 = &amp;\delta \cr\cr
-\implies &amp;a_2 \in \mathcal{V}(b_3)
+\implies &amp;a_2 + t_2 \in \mathcal{V}(b_3)
 \end{aligned}$$</p>
 <hr>
 <h3 id="-distance-of--boldsymbola_n--t_2-from-the-right-boundary-of--boldsymbolmathcalvb_3">🧮 Distance of $\, \boldsymbol{a_n + t_2}$ from the right boundary of $\, \boldsymbol{\mathcal{V}(b_3)}$</h3>
 <p>$$\begin{aligned}
-\sup\mathcal{V}(b_3) - (a_n + \boldsymbol{t}_2) = &amp;2.5 - \left(\frac{2(n-1) - n}{2n} + \delta + 1 + \frac{n-1}{n}\right) \cr
+\sup\mathcal{V}(b_3) - (a_n + t_2) = &amp;2.5 - \left(\frac{2(n-1) - n}{2n} + \delta + 1 + \frac{n-1}{n}\right) \cr
 = &amp;2.5 - \frac{2(n-1) - n}{2n} - \delta - 1 - \frac{n-1}{n} \cr
 = &amp;1.5 - \left(\frac{n-1}{n} - \frac{1}{2}\right) - \delta - \frac{n-1}{n} \cr
 = &amp;2 - \frac{n-1}{n} - \delta - \frac{n-1}{n} \cr
 = &amp;2 - 2\frac{n-1}{n} - \delta\cr
 = &amp;2\left(1 - \frac{n-1}{n}\right) - \delta\cr
 = &amp;\frac{2}{n} - \delta\cr\cr
-\implies &amp;a_n \in \mathcal{V}(b_3)
+\implies &amp;a_n + t_2 \in \mathcal{V}(b_3)
 \end{aligned}$$</p>
 <hr>
 ]]></content>
