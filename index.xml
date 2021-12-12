@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 21 Nov 2021 19:08:00 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 10:58:57 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proving the lower bound for ICP 1</title>
+      <link>https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/</link>
+      <pubDate>Sun, 12 Dec 2021 10:58:57 +0100</pubDate>
+      
+      <guid>https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/</guid>
+      <description>⚠️ Disclaimer ⚠️ These are my study notes for theorem 4.1 of On the performance of the ICP algorithm by Ezra et al. in which I try to retrace their proof.
+These notes are still very much incomplete and a work in progress.
+Question about theorem 4.1    Which points contribute to the translation? $$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation, i.</description>
+    </item>
+    
     <item>
       <title>Deriving the optimal ICP translation</title>
       <link>https://chrisoffner.github.io/studynotes/posts/2021/11/deriving-the-optimal-icp-translation/</link>
