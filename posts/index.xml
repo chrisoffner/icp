@@ -6,8 +6,99 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-        <lastBuildDate>Sun, 12 Dec 2021 10:58:57 +0100</lastBuildDate>
+        <lastBuildDate>Sun, 09 Jan 2022 21:42:00 +0100</lastBuildDate>
         <atom:link href="https://chrisoffner.github.io/studynotes/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>🔧 Fixing the lower bound proof</title>
+            <link>https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/</link>
+            <pubDate>Sun, 09 Jan 2022 21:42:00 +0100</pubDate>
+            
+            <guid>https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/</guid>
+            <description>Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some bugs that we attempt to account for here.
+🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j+1}$ between the cells $\mathcal{V}(b_{n-j+1})$ and $\mathcal{V}(b_{n-j+2})$. There exist $n-1$ voronoi boundaries $\beta_{n-j+1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &amp;hellip;, 2$.</description>
+            <content type="html"><![CDATA[<p>Although the construction by <a href="https://www.sciencedirect.com/science/article/pii/S0925772108000217">Ezra et al.</a> does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some <a href="../bugs-in-the-lower-bound-proof/">bugs</a> that we attempt to account for here.</p>
+<h3 id="-in-a-nutshell">🌰 In a nutshell</h3>
+<ul>
+<li>We define a <em>round</em> $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j+1}$ between the cells $\mathcal{V}(b_{n-j+1})$ and $\mathcal{V}(b_{n-j+2})$.</li>
+<li>There exist $n-1$ voronoi boundaries $\beta_{n-j+1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &hellip;, 2$.</li>
+<li>In each iteration of round $j$, <em>roughly</em> $j$ points pass from one cell to the next, so we need <em>roughly</em> $\frac{n-1}{j}$ iterations for each boundary. $a_1$ never crosses a boundary, thus $\frac{n-1}{j}$ and not $\frac{n}{j}$.</li>
+<li>Overall, that amounts to $(n-1) \cdot H(n) \in \Theta (n\log n)$.</li>
+</ul>
+<h3 id="-corrected-proof">🤓 Corrected proof</h3>
+<p>In the corrected proof we proceed mostly as in the original proof by Ezra et al., except for an additional case analysis of the last iteration in a round.</p>
+<hr>
+<p><strong>For ease of interpretation</strong></p>
+<ul>
+<li>We can mostly ignore $a_1 \in A$, so we define $A' := \{a_2, &hellip;, a_n\}$</li>
+<li>Rounds are counted down, starting from $j=n$ to $j=2$</li>
+<li>$\beta_{n-j}$ is the boundary belonging to round $j+1$</li>
+<li>$\beta_{n-j+1}$ is the boundary belonging to round $j$</li>
+<li>$\beta_{n-j+2}$ is the boundary belonging to round $j-1$</li>
+</ul>
+<hr>
+<p>We differentiate two possibilities for the last iteration of a round:</p>
+<h4 id="case-1-rounds-do-not-overlap">Case 1: Rounds do not overlap</h4>
+<p>If the last iteration of a round $j + 1$ is <em>not</em> also the first iteration of the following round, i.e. in this last iteration, $\beta_{n-j}$ is the only boundary that is crossed, then round $j + 1$ will have taken $\frac{n-1}{j}$ iterations.</p>
+<h4 id="case-2-rounds-do-overlap">Case 2: Rounds do overlap</h4>
+<p>However, it is possible that the last iteration of a round $j + 1$ is also the first iteration of the following round $j$. This is the case whenever two boundaries are crossed in a single iteration – $\beta_{n-j}$ is crossed for the last time and $\beta_{n-j+1}$ for the first time.</p>
+<p>If in the <strong>first iteration</strong> of a round $j$ there are still $k &gt; 0$ points to the left of $\beta_{n-j}$, then $j - k$ points will cross the $\beta_{n-j+1}$ in this first iteration, but altogether $j$ points will cross a boundary, since those $k$ points will all cross $\beta_{n-j}$. Because every point that crosses a boundary contributes $\frac{1}{n}$ to the relative translation, we obtain a translation of $\frac{j}{n}$ which establishes the induction step.</p>
+<p>Given that $j - k$ points will cross $\beta_{n-j+1}$ in such an overlapping first iteration, $(n-1) - (j-k)$ points of $A'$ remain in the Voronoi cell to the left of $\beta_{n-j+1}$.</p>
+<p>Moving by $j$ interval steps of $\frac{1}{n}$ each iteration in round $j$ means this round will take $\frac{(n-1) - (j-k)}{j} = \frac{n-1}{j} - c$ iterations to move all points of $A'$ across $\beta_{n-j+1}$, for some $c &lt; 1$ (because $k &lt; j$).</p>
+<h4 id="complexity">Complexity</h4>
+<p>In summary, we have $n-1$ boundaries, each of which takes between
+$\frac{n-1}{j} - c$ and $\frac{n-1}{j}$ steps to cross. This leads us to the claimed complexity
+$$n \cdot H(n) \in \Theta (n\log n).$$</p>
+<p>$\square$</p>
+<p>As an empirical side note, the ratio of overlapping rounds to $n$ approaches 1 as $n$ grows.</p>
+<p><img src="/images/overlappingroundsrationew.svg" alt="overlappingroundsrationew.svg"></p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>🪳 Bugs in the lower bound proof</title>
+            <link>https://chrisoffner.github.io/studynotes/posts/2022/01/bugs-in-the-lower-bound-proof/</link>
+            <pubDate>Sun, 09 Jan 2022 21:34:00 +0100</pubDate>
+            
+            <guid>https://chrisoffner.github.io/studynotes/posts/2022/01/bugs-in-the-lower-bound-proof/</guid>
+            <description>The proof starts off by defining a round $j$:
+ Assume that the points of $A$, except for the leftmost one, are assigned to $b_{n−j+1}$ and $b_{n−j+2}$, for some $1 \le j \le n$ (clearly, these assignments can involve only two consecutive Voronoi cells), and consider all iterations of the algorithm, in which some points of $A$ cross the common Voronoi boundary $\beta_{n−j+1}$ of the cells $\mathcal{V}(b_{n−j+1}), \mathcal{V}(b_{n−j+2})$. We call the sequence of these iterations round $j$ of the algorithm.</description>
+            <content type="html"><![CDATA[<p>The proof starts off by defining a round $j$:</p>
+<blockquote>
+<p>Assume that the points of $A$, except for the leftmost one, are assigned to $b_{n−j+1}$ and $b_{n−j+2}$, for some $1 \le j \le n$ (clearly, these assignments can involve only two consecutive Voronoi cells), and consider all iterations of the algorithm, in which some points of $A$ cross the common Voronoi boundary $\beta_{n−j+1}$ of the cells $\mathcal{V}(b_{n−j+1}), \mathcal{V}(b_{n−j+2})$. We call the sequence of these iterations <em>round</em> $j$ of the algorithm.</p>
+</blockquote>
+<p>⚡️ For $j=1$ the point $b_{n-j+2} = b_{n+1}$ does not exist, so instead of the mentioned $1 \le j \le n$ it should read $2 \le j \le n$.</p>
+<hr>
+<p>The proof claims that in each iteration of round $j$ except its last one, exactly $j$ points cross boundary $b(j)$:</p>
+<blockquote>
+<p>$(ii)$ at each iteration in this round, other than the last one, the overall number of points of $A$ that cross $\beta_{n−j +1}$ is exactly $j$, and no point crosses any other boundary</p>
+</blockquote>
+<p>⚡️  <strong>Counterexample 1:</strong>
+<img src="/images/counterexample1new.svg" alt="counterexample1new.svg"></p>
+<p>For $n = 5, j = 2$ we can see that in iteration 4, $\beta_3$ is crossed by $a_2$, making iteration 4 the last iteration of round $3$.
+At the same time, $\beta_4$ is also crossed by $a_n$, making iteration 4 also the first iteration of round $2$.
+In this first iteration of round $2$ we have only one point cross $\beta_4$, which contradicts both claims that in each but the last iteration of a round, exactly $j$ points ($j=2$ here) would cross its boundary, and that no other boundary would be crossed (the previous boundary $\beta_3$ is also crossed).</p>
+<p>⚡️  <strong>Counterexample 2:</strong> $n = 6, j = 3$</p>
+<p><img src="/images/counterexample2new.svg" alt="counterexample2new.svg"></p>
+<p>The same situation can be observed whenever the last iteration of a round is also the first iteration of the next round, i.e. whenever two boundaries are crossed in the same iteration.</p>
+<hr>
+<p>The proof claims that in the last iteration of round $j$, the number $l$ of points in $A'$ to the left of $b(j)$ is less than $j$: ($0 \le l &lt; j)$:</p>
+<blockquote>
+<p>Thus, at each iteration of round $j$ (except for the last one), in which there are points of $A$ that remain in the cell $\mathcal{V}(b_{n−j+1})$, the $j$ rightmost points of $A$ (among those contained in $\mathcal{V}(b+{n−j+1}))$ cross $\beta_{n−j+1}$. Let us now consider the last such iteration. In this case, all the points of $A$, except $l$ of them, for some $0 \le l &lt; j$ (and the leftmost point, which we ignore), have crossed $\beta_{n−j+1}$ in previous iterations.</p>
+</blockquote>
+<p>⚡️ <strong>The problem with $\boldsymbol{0 \le l}$</strong></p>
+<p>How could $l = 0$ in the last iteration of a round? If $l = 0$, i.e. there remain no points in $\mathcal{V}(b_{n−j+1})$, then, by the definition of a <em>round</em>, we cannot be in the last iteration of round $j$ anymore.</p>
+<p>⚡️ <strong>The problem with $\boldsymbol{l &lt; j}$</strong></p>
+<p><img src="/images/counterexample3new.svg" alt="counterexample3new.svg"></p>
+<p>For $n = 7, j = 3$ we see that iteration 7 is the last iteration of round $3$, i.e. in this iteration $\beta_5$ is crossed for the last time. Contrary to the claim $l &lt; j$, we have $l = j = 3$ here.</p>
+<hr>
+<p>The proof claims that in the last iteration of round $j$ exactly $j-1$ points cross <em>any</em> boundary:</p>
+<blockquote>
+<p>$(iii)$ at the last iteration of the round, the overall number of points of $A$ that cross either $\beta_{n−j+1}$ or $\beta_{n−j +2}$ is exactly $j − 1$.</p>
+</blockquote>
+<p>Using the same counterexample as above, for $n = 7, j = 3$ we can see that in the last iteration of round $3$, exactly $3 = j$ points (not $j - 1$!) cross $\beta_5 = \beta_{n−j+1}$.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Proving the lower bound for ICP 1</title>
@@ -64,7 +155,7 @@ These notes are still very much incomplete and a work in progress.
 <h2 id="which-points-contribute-to-the-translation">Which points contribute to the translation?</h2>
 <p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \sum_{a \in A} (N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - N_B(\boldsymbol{a} +\boldsymbol{t_{i-2}}))$$ implies that any point $\boldsymbol{a}$ that did not change its corresponding nearest neighbour after the previous translation,  i.e. all $a$ for which $N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) =  N_B(\boldsymbol{a} + \boldsymbol{t_{i-2}})$, does not contribute to $\boldsymbol{\Delta t_i}$.</p>
 <p>The algorithm terminates once no point $\boldsymbol{a}$ has changed its nearest neighbour, in which case $\boldsymbol{\Delta t_i} = \boldsymbol{0}$.</p>
-<p>💡 <em><strong>In each iteration, only the points that changed their neighbour during the previous translation contribute to the translation.</strong></em> 💡</p>
+<p>💡 <em><strong>In each iteration, only points that changed their corresponding nearest neighbour during the previous translation contribute to the translation.</strong></em> 💡</p>
 <hr>
 <h2 id="theorem-41">Theorem 4.1</h2>
 <p>We construct two point sets $A, B$ on the real line, where $|A| = |B| = n$.</p>

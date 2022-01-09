@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 12 Dec 2021 10:58:57 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jan 2022 21:42:00 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🔧 Fixing the lower bound proof</title>
+      <link>https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/</link>
+      <pubDate>Sun, 09 Jan 2022 21:42:00 +0100</pubDate>
+      
+      <guid>https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/</guid>
+      <description>Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some bugs that we attempt to account for here.
+🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j+1}$ between the cells $\mathcal{V}(b_{n-j+1})$ and $\mathcal{V}(b_{n-j+2})$. There exist $n-1$ voronoi boundaries $\beta_{n-j+1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &amp;hellip;, 2$.</description>
+    </item>
+    
+    <item>
+      <title>🪳 Bugs in the lower bound proof</title>
+      <link>https://chrisoffner.github.io/studynotes/posts/2022/01/bugs-in-the-lower-bound-proof/</link>
+      <pubDate>Sun, 09 Jan 2022 21:34:00 +0100</pubDate>
+      
+      <guid>https://chrisoffner.github.io/studynotes/posts/2022/01/bugs-in-the-lower-bound-proof/</guid>
+      <description>The proof starts off by defining a round $j$:
+ Assume that the points of $A$, except for the leftmost one, are assigned to $b_{n−j+1}$ and $b_{n−j+2}$, for some $1 \le j \le n$ (clearly, these assignments can involve only two consecutive Voronoi cells), and consider all iterations of the algorithm, in which some points of $A$ cross the common Voronoi boundary $\beta_{n−j+1}$ of the cells $\mathcal{V}(b_{n−j+1}), \mathcal{V}(b_{n−j+2})$. We call the sequence of these iterations round $j$ of the algorithm.</description>
+    </item>
+    
     <item>
       <title>Proving the lower bound for ICP 1</title>
       <link>https://chrisoffner.github.io/studynotes/posts/2021/12/proving-the-lower-bound-for-icp-1/</link>

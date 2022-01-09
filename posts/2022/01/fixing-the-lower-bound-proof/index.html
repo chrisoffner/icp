@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Chris Offner ">
+<meta name="description" content="Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some bugs that we attempt to account for here.
+🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$. There exist $n-1$ voronoi boundaries $\beta_{n-j&#43;1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &amp;hellip;, 2$." />
+<meta name="keywords" content=", icp, algorithm, visualisation" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/" />
+
+
+    <title>
+        
+            🔧 Fixing the lower bound proof :: Chris Offner 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://chrisoffner.github.io/studynotes/main.17863a81d979b637a02cd7632a4d86e9d80563ef460fd6af1a56962efcaa066b.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://chrisoffner.github.io/studynotes/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://chrisoffner.github.io/studynotes/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://chrisoffner.github.io/studynotes/favicon-16x16.png">
+    <link rel="manifest" href="https://chrisoffner.github.io/studynotes/site.webmanifest">
+    <link rel="mask-icon" href="https://chrisoffner.github.io/studynotes/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://chrisoffner.github.io/studynotes/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="🔧 Fixing the lower bound proof">
+<meta itemprop="description" content="Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some bugs that we attempt to account for here.
+🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$. There exist $n-1$ voronoi boundaries $\beta_{n-j&#43;1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &hellip;, 2$."><meta itemprop="datePublished" content="2022-01-09T21:42:00+01:00" />
+<meta itemprop="dateModified" content="2022-01-09T21:42:00+01:00" />
+<meta itemprop="wordCount" content="526"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="keywords" content="icp,algorithm,visualisation," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
+
+<meta name="twitter:title" content="🔧 Fixing the lower bound proof"/>
+<meta name="twitter:description" content="Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some bugs that we attempt to account for here.
+🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$. There exist $n-1$ voronoi boundaries $\beta_{n-j&#43;1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &hellip;, 2$."/>
+
+
+
+
+    <meta property="og:title" content="🔧 Fixing the lower bound proof" />
+<meta property="og:description" content="Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some bugs that we attempt to account for here.
+🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$. There exist $n-1$ voronoi boundaries $\beta_{n-j&#43;1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &hellip;, 2$." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/" /><meta property="og:image" content="https://chrisoffner.github.io/studynotes/"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-09T21:42:00+01:00" />
+<meta property="article:modified_time" content="2022-01-09T21:42:00+01:00" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2022-01-09 21:42:00 &#43;0100 CET" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://chrisoffner.github.io/studynotes/posts/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark"></span>
+            <span class="logo__text">Chris&#39; Study Notes</span>
+            <span class="logo__cursor" style=
+                  "visibility:hidden;
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://chrisoffner.github.io/studynotes/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/">🔧 Fixing the lower bound proof</a>
+      </h1>
+
+      
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body, {
+        delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+  ],
+    });"></script>
+      
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <p>Although the construction by <a href="https://www.sciencedirect.com/science/article/pii/S0925772108000217">Ezra et al.</a> does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some <a href="../bugs-in-the-lower-bound-proof/">bugs</a> that we attempt to account for here.</p>
+<h3 id="-in-a-nutshell">🌰 In a nutshell</h3>
+<ul>
+<li>We define a <em>round</em> $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j+1}$ between the cells $\mathcal{V}(b_{n-j+1})$ and $\mathcal{V}(b_{n-j+2})$.</li>
+<li>There exist $n-1$ voronoi boundaries $\beta_{n-j+1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &hellip;, 2$.</li>
+<li>In each iteration of round $j$, <em>roughly</em> $j$ points pass from one cell to the next, so we need <em>roughly</em> $\frac{n-1}{j}$ iterations for each boundary. $a_1$ never crosses a boundary, thus $\frac{n-1}{j}$ and not $\frac{n}{j}$.</li>
+<li>Overall, that amounts to $(n-1) \cdot H(n) \in \Theta (n\log n)$.</li>
+</ul>
+<h3 id="-corrected-proof">🤓 Corrected proof</h3>
+<p>In the corrected proof we proceed mostly as in the original proof by Ezra et al., except for an additional case analysis of the last iteration in a round.</p>
+<hr>
+<p><strong>For ease of interpretation</strong></p>
+<ul>
+<li>We can mostly ignore $a_1 \in A$, so we define $A' := \{a_2, &hellip;, a_n\}$</li>
+<li>Rounds are counted down, starting from $j=n$ to $j=2$</li>
+<li>$\beta_{n-j}$ is the boundary belonging to round $j+1$</li>
+<li>$\beta_{n-j+1}$ is the boundary belonging to round $j$</li>
+<li>$\beta_{n-j+2}$ is the boundary belonging to round $j-1$</li>
+</ul>
+<hr>
+<p>We differentiate two possibilities for the last iteration of a round:</p>
+<h4 id="case-1-rounds-do-not-overlap">Case 1: Rounds do not overlap</h4>
+<p>If the last iteration of a round $j + 1$ is <em>not</em> also the first iteration of the following round, i.e. in this last iteration, $\beta_{n-j}$ is the only boundary that is crossed, then round $j + 1$ will have taken $\frac{n-1}{j}$ iterations.</p>
+<h4 id="case-2-rounds-do-overlap">Case 2: Rounds do overlap</h4>
+<p>However, it is possible that the last iteration of a round $j + 1$ is also the first iteration of the following round $j$. This is the case whenever two boundaries are crossed in a single iteration – $\beta_{n-j}$ is crossed for the last time and $\beta_{n-j+1}$ for the first time.</p>
+<p>If in the <strong>first iteration</strong> of a round $j$ there are still $k &gt; 0$ points to the left of $\beta_{n-j}$, then $j - k$ points will cross the $\beta_{n-j+1}$ in this first iteration, but altogether $j$ points will cross a boundary, since those $k$ points will all cross $\beta_{n-j}$. Because every point that crosses a boundary contributes $\frac{1}{n}$ to the relative translation, we obtain a translation of $\frac{j}{n}$ which establishes the induction step.</p>
+<p>Given that $j - k$ points will cross $\beta_{n-j+1}$ in such an overlapping first iteration, $(n-1) - (j-k)$ points of $A'$ remain in the Voronoi cell to the left of $\beta_{n-j+1}$.</p>
+<p>Moving by $j$ interval steps of $\frac{1}{n}$ each iteration in round $j$ means this round will take $\frac{(n-1) - (j-k)}{j} = \frac{n-1}{j} - c$ iterations to move all points of $A'$ across $\beta_{n-j+1}$, for some $c &lt; 1$ (because $k &lt; j$).</p>
+<h4 id="complexity">Complexity</h4>
+<p>In summary, we have $n-1$ boundaries, each of which takes between
+$\frac{n-1}{j} - c$ and $\frac{n-1}{j}$ steps to cross. This leads us to the claimed complexity
+$$n \cdot H(n) \in \Theta (n\log n).$$</p>
+<p>$\square$</p>
+<p>As an empirical side note, the ratio of overlapping rounds to $n$ approaches 1 as $n$ grows.</p>
+<p><img src="https://chrisoffner.github.io/studynotes/images/overlappingroundsrationew.svg" alt="overlappingroundsrationew.svg"></p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://chrisoffner.github.io/studynotes/tags/icp/">icp</a></span>
+        <span class="tag"><a href="https://chrisoffner.github.io/studynotes/tags/algorithm/">algorithm</a></span>
+        <span class="tag"><a href="https://chrisoffner.github.io/studynotes/tags/visualisation/">visualisation</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          09.01.2022 21:42
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        <div class="pagination__title">
+            <span class="pagination__title-h"></span>
+            <hr />
+        </div>
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://chrisoffner.github.io/studynotes/posts/2022/01/bugs-in-the-lower-bound-proof/">
+                    <span class="button__text">🪳 Bugs in the lower bound proof</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2022</span>
+            <span><a href="https://chrisoffner.github.io/studynotes/">Chris Offner</a></span>
+            
+            
+            
+        </div>
+    </div>
+    
+    
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+        </div>
+    </div>
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://chrisoffner.github.io/studynotes/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>
