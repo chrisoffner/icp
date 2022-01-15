@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Chris Offner ">
-<meta name="description" content="The construction Arthur &amp;amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter over which ICP is supposed to require $|B|$ iterations to terminate.
-However, I&amp;rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.
+<meta name="description" content="The construction Arthur &amp;amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter on which ICP is supposed to require $|B|$ iterations to terminate.
+However, I&amp;rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.
 Previously we have discussed the following lemma by Ezra, Efrat, and Sharir." />
 <meta name="keywords" content=", icp, algorithm, visualisation" />
 <meta name="robots" content="noodp" />
@@ -43,26 +43,26 @@ Previously we have discussed the following lemma by Ezra, Efrat, and Sharir." />
 
 
 <meta itemprop="name" content="⚔️ Conflicting interpretations of ICP translation?">
-<meta itemprop="description" content="The construction Arthur &amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter over which ICP is supposed to require $|B|$ iterations to terminate.
-However, I&rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.
+<meta itemprop="description" content="The construction Arthur &amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter on which ICP is supposed to require $|B|$ iterations to terminate.
+However, I&rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.
 Previously we have discussed the following lemma by Ezra, Efrat, and Sharir."><meta itemprop="datePublished" content="2022-01-15T22:30:00+01:00" />
 <meta itemprop="dateModified" content="2022-01-15T22:30:00+01:00" />
-<meta itemprop="wordCount" content="737"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="734"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="icp,algorithm,visualisation," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
 
 <meta name="twitter:title" content="⚔️ Conflicting interpretations of ICP translation?"/>
-<meta name="twitter:description" content="The construction Arthur &amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter over which ICP is supposed to require $|B|$ iterations to terminate.
-However, I&rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.
+<meta name="twitter:description" content="The construction Arthur &amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter on which ICP is supposed to require $|B|$ iterations to terminate.
+However, I&rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.
 Previously we have discussed the following lemma by Ezra, Efrat, and Sharir."/>
 
 
 
 
     <meta property="og:title" content="⚔️ Conflicting interpretations of ICP translation?" />
-<meta property="og:description" content="The construction Arthur &amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter over which ICP is supposed to require $|B|$ iterations to terminate.
-However, I&rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.
+<meta property="og:description" content="The construction Arthur &amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter on which ICP is supposed to require $|B|$ iterations to terminate.
+However, I&rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.
 Previously we have discussed the following lemma by Ezra, Efrat, and Sharir." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chrisoffner.github.io/studynotes/posts/2022/01/%EF%B8%8F-conflicting-interpretations-of-icp-translation/" /><meta property="og:image" content="https://chrisoffner.github.io/studynotes/"/><meta property="article:section" content="posts" />
@@ -173,9 +173,9 @@ Previously we have discussed the following lemma by Ezra, Efrat, and Sharir." />
       
 
       <div class="post-content">
-        <p>The construction <em><a href="https://ieeexplore.ieee.org/document/4031352">Arthur &amp; Vassilvitskii</a></em> use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call <em><strong>The Linear Shifter</strong></em> over which ICP is supposed to require $|B|$ iterations to terminate.</p>
-<p>However, I&rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.</p>
-<p>Previously we have discussed the following lemma by <a href="(https://www.sciencedirect.com/science/article/pii/S0925772108000217)">Ezra, Efrat, and Sharir</a>.</p>
+        <p>The construction <em><a href="https://ieeexplore.ieee.org/document/4031352">Arthur &amp; Vassilvitskii</a></em> use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call <em><strong>The Linear Shifter</strong></em> on which ICP is supposed to require $|B|$ iterations to terminate.</p>
+<p>However, I&rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.</p>
+<p><a href="../../../2021/11/deriving-the-optimal-icp-translation/">Previously</a> we have discussed the following lemma by <a href="(https://www.sciencedirect.com/science/article/pii/S0925772108000217)">Ezra, Efrat, and Sharir</a>.</p>
 <blockquote>
 <p><strong>Lemma 2.3</strong>
 At each iteration $i \ge 2$ of the algorithm, the relative translation vector $\Delta t_i$ satisfies</p>
@@ -185,7 +185,7 @@ At each iteration $i \ge 2$ of the algorithm, the relative translation vector $\
 Follows using easy algebraic manipulations, based on the obvious equality that follows by construction</p>
 <p>$$\boldsymbol{\Delta t_i} = \frac{1}{m} \left(N_B(\boldsymbol{a} + \boldsymbol{t_{i-1}}) - (\boldsymbol{a} + \boldsymbol{t_{i-1}})\right)\qquad \qquad(1)$$</p>
 </blockquote>
-<p>This introduces what may think of as two interpretations of the relative translation $\boldsymbol{\Delta t_i}$.</p>
+<p>This introduces what we may think of as two interpretations of the relative translation $\boldsymbol{\Delta t_i}$.</p>
 <p>$(1)$ <em>The loss interpretation</em>
 The relative translation $\boldsymbol{\Delta t_i}$ is the averaged sum of all differences between current nearest neighbors and their corresponding points $a \in A.$ This follows directly from the ICP&rsquo;s loss minimisation objective.</p>
 <p>$(2)$ <em>The momentum interpretation</em>
@@ -194,16 +194,15 @@ The relative translation $\boldsymbol{\Delta t_i}$  is the averaged sum of diffe
 <p>Let&rsquo;s now look at the point configuration in question.</p>
 <blockquote>
 <p><em><strong>The Linear Shifter</strong></em> is a one-dimensional configuration of points $(A, B)$ upon which $\text{ICP}_k$ can require $|B|$ iterations to terminate even when $|A| = 1$.</p>
-<p>Define $B = { b_0, b_1,&hellip;,b_m }$ by setting $b_0 = 0$, and $b = \frac{1}{k} +&hellip;+ \frac{1}{k_{i-1}}$ for $i &gt;0$ . Let $A = { a = 0 }$, and suppose we initially have $x = b_1$ and $N_B(a) = b_0$.</p>
+<p>Define $B = \{ b_0, b_1,&hellip;,b_m \}$ by setting $b_0 = 0$, and $b = \frac{1}{k} +&hellip;+ \frac{1}{k_{i-1}}$ for $i &gt;0.$ Let $A = \{ a = 0 \}$, and suppose we initially have $x = b_1$ and $N_B(a) = b_0.$</p>
 <p><strong>Lemma 3.2.</strong> The $\text{ICP}_k$ algorithm requires $|B| − 1$ iterations to run on the Linear Shifter described above.</p>
 <p><strong>Proof.</strong> Suppose that during some iteration we compute a translation of $x = b_i$ from a nearest neighbor assignment of $N_B(a) = b_{i−1}$. (This is the case initially with $i = 1$). We will then update $N_B(a)$ to $b_i$, and by $(2)$, this will increase $x$ by $\frac{b_i − b_{i−1}}{k}$ to $b_{i+1}$. The result follows.</p>
 </blockquote>
-<p>Below is an illustration of the starting position of the <em>Linear Shifter</em> for $k = m = 4$. We have $A = {a = 0}$ and $B = {0, 1, 1.25, 1.3125, 1.32812}$, with $a_0$ in red and $B$ in blue.</p>
+<p>Below is an illustration of the starting position of the <em>Linear Shifter</em> for $k = m = 4$. We have $A = \{a = 0\}$ and $B = \{0, 1, 1.25, 1.3125, 1.32812\}$, with $a_0$ in red and $B$ in blue.</p>
 <p><img src="https://chrisoffner.github.io/studynotes/images/linearshifter1.svg" alt="linearshifter1.svg"></p>
-<p>![[linearshifter1 1.svg]]</p>
 <p>The proof for Lemma 3.2. seems to work only under $(2)$, the <em>momentum interpretation</em>.</p>
 <p>Let&rsquo;s follow the proof by assuming we begin with an initial translation equal to $b_1 = 1$ and $N_B(a) = b_0 = 0$.</p>
-<p>We translate $a$ by $2$, so that now $a = 0 + 1 = b_1$. This means that $b_1$ becomes the nearest neighbor, and according to $(2)$, for the next translation we get $\frac{b_1 - b_0}{k} = \frac{1}{4}$, which means that $a$ will further be moved to $1.25 = b_2$, and so on.</p>
+<p>We translate $a$ by $1$, so that now $a = 0 + 1 = b_1$. This means that $b_1$ becomes the nearest neighbor, and according to $(2)$, for the next translation we get $\frac{b_1 - b_0}{k} = \frac{1}{4}$, which means that $a$ will further be moved to $1.25 = b_2$, and so on.</p>
 <p>The proof works and the algorithm takes $\Theta(m)$ iterations to complete.</p>
 <p>⚡️ <strong>However</strong>, if after applying the initial translation and moving $a$ from $0$ to $1$, we calculate the next translation using the <em>loss interpretation</em> $(1)$, we run into trouble.</p>
 <p>$(1)$ is the <em>&ldquo;vanilla&rdquo;</em> way to think about the ICP algorithm; at each step, the algorithm tries to minimise its loss function, i.e. the distance of each point in $a$ to its nearest neighbor in $B$.</p>
@@ -211,7 +210,7 @@ The relative translation $\boldsymbol{\Delta t_i}$  is the averaged sum of diffe
 <hr>
 <p>🤔 My speculation is that this problem might arise because equivalence of $(1)$ and $(2)$ from the aforementioned Lemma 2.3. is holds only if there is <em>no initial translation</em>.</p>
 <p><em>Ezra et al.</em> present a version of the algorithm in which no initial translation is given, and so even the first translation is calculated via $(1)$ – which in this example of $a = 0 = b_0 = N_B(a)$ would mean that the algorithm would terminate immediately.</p>
-<p>If this suspicion is accurate, it might be problematic for <em>Arthur and Vassilvitskii</em>&rsquo;s construction as it seems to rely heavily both on $(2)$ and on using an initial nonzero translation.</p>
+<p>If this suspicion is accurate, it might be problematic for the construction by <em>Arthur and Vassilvitskii</em> as it seems to rely heavily both on $(2)$ and on using an initial nonzero translation.</p>
 
       </div>
     </article>

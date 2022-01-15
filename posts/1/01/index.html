@@ -5,8 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Chris Offner ">
-<meta name="description" content="🔧 Fixing the $\Theta (n \log n)$ proof Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some [[Bugs in the Theorem 4.1 Proof]] that we attempt to correct here.
-🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$." />
+<meta name="description" content="" />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -42,24 +41,21 @@
 
 
 <meta itemprop="name" content="">
-<meta itemprop="description" content="🔧 Fixing the $\Theta (n \log n)$ proof Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some [[Bugs in the Theorem 4.1 Proof]] that we attempt to correct here.
-🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$.">
+<meta itemprop="description" content="">
 
-<meta itemprop="wordCount" content="540"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="0"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
 
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="🔧 Fixing the $\Theta (n \log n)$ proof Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some [[Bugs in the Theorem 4.1 Proof]] that we attempt to correct here.
-🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$."/>
+<meta name="twitter:description" content=""/>
 
 
 
 
     <meta property="og:title" content="" />
-<meta property="og:description" content="🔧 Fixing the $\Theta (n \log n)$ proof Although the construction by Ezra et al. does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some [[Bugs in the Theorem 4.1 Proof]] that we attempt to correct here.
-🌰 In a nutshell  We define a round $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j&#43;1}$ between the cells $\mathcal{V}(b_{n-j&#43;1})$ and $\mathcal{V}(b_{n-j&#43;2})$." />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chrisoffner.github.io/studynotes/posts/1/01/" /><meta property="og:image" content="https://chrisoffner.github.io/studynotes/"/><meta property="article:section" content="posts" />
 
@@ -152,44 +148,7 @@
       
 
       <div class="post-content">
-        <h3 id="-fixing-the-theta-n-log-n-proof">🔧 Fixing the $\Theta (n \log n)$ proof</h3>
-<p>Although the construction by <a href="https://www.sciencedirect.com/science/article/pii/S0925772108000217">Ezra et al.</a> does support the claimed $\Theta (n \log n)$ running time, the proof via induction contains some [[Bugs in the Theorem 4.1 Proof]] that we attempt to correct here.</p>
-<h3 id="-in-a-nutshell">🌰 In a nutshell</h3>
-<ul>
-<li>We define a <em>round</em> $j$ as the sequence of iterations in which any points cross the Voronoi boundary $\beta_{n-j+1}$ between the cells $\mathcal{V}(b_{n-j+1})$ and $\mathcal{V}(b_{n-j+2})$.</li>
-<li>There exist $n-1$ voronoi boundaries $\beta_{n-j+1}$ between the $n$ adjacent points $b \in B$, for $j = n, n-1, &hellip;, 2$.</li>
-<li>In each iteration of round $j$, <em>roughly</em> $j$ points pass from one cell to the next, so we need <em>roughly</em> $\frac{n-1}{j}$ iterations for each boundary.
-($a_1$ never crosses a boundary, thus $\frac{n-1}{j}$ and not $\frac{n}{j}$.)</li>
-<li>Overall, that amounts to $(n-1) \cdot H(n) \in \Theta (n\log n)$.</li>
-</ul>
-<h3 id="-corrected-proof">🤓 Corrected proof</h3>
-<p>In the corrected proof we proceed mostly as in the original proof by Ezra et al., except for an additional case analysis of the last iteration in a round.</p>
-<hr>
-<p><strong>For ease of interpretation</strong></p>
-<ul>
-<li>We can mostly ignore $a_1 \in A$, so we define $A' := {a_2, &hellip;, a_n}$</li>
-<li>Rounds are counted down, starting from $j=n$ to $j=2$</li>
-<li>$\beta_{n-j}$ is the boundary belonging to round $j+1$</li>
-<li>$\beta_{n-j+1}$ is the boundary belonging to round $j$</li>
-<li>$\beta_{n-j+2}$ is the boundary belonging to round $j-1$</li>
-</ul>
-<hr>
-<p>We differentiate two possibilities for the last iteration of a round:</p>
-<h4 id="case-1-rounds-do-not-overlap">Case 1: Rounds do not overlap</h4>
-<p>If the last iteration of a round $j + 1$ is <em>not</em> also the first iteration of the following round, i.e. in this last iteration, $\beta_{n-j}$ is the only boundary that is crossed, then round $j + 1$ will have taken $\frac{n-1}{j}$ iterations.</p>
-<h4 id="case-2-rounds-do-overlap">Case 2: Rounds do overlap</h4>
-<p>However, it is possible that the last iteration of a round $j + 1$ is also the first iteration of the following round $j$. This is the case whenever two boundaries are crossed in a single iteration – $\beta_{n-j}$ is crossed for the last time and $\beta_{n-j+1}$ for the first time.</p>
-<p>If in the <strong>first iteration</strong> of a round $j$ there are still $k &gt; 0$ points to the left of $\beta_{n-j}$, then $j - k$ points will cross the $\beta_{n-j+1}$ in this first iteration, but altogether $j$ points will cross a boundary, since those $k$ points will all cross $\beta_{n-j}$. Because every point that crosses a boundary contributes $\frac{1}{n}$ to the relative translation, we obtain a translation of $\frac{j}{n}$ which establishes the induction step.</p>
-<p>Given that $j - k$ points will cross $\beta_{n-j+1}$ in such an overlapping first iteration, $(n-1) - (j-k)$ points of $A'$ remain in the Voronoi cell to the left of $\beta_{n-j+1}$.</p>
-<p>Moving by $j$ interval steps of $\frac{1}{n}$ each iteration in round $j$ means this round will take $\frac{(n-1) - (j-k)}{j} = \frac{n-1}{j} - c$ iterations to move all points of $A'$ across $\beta_{n-j+1}$, for some $c &lt; 1$ (because $k &lt; j$).</p>
-<h4 id="complexity">Complexity</h4>
-<p>In summary, we have $n-1$ boundaries, each of which takes between
-$\frac{n-1}{j} - c$ and $\frac{n-1}{j}$ steps to cross. This leads us to the claimed complexity
-$$n \cdot H(n) \in \Theta (n\log n).$$</p>
-<p>$\square$</p>
-<p>As an empirical side note, the the ratio of overlapping rounds to $n$ approaches 1 as $n$ grows.</p>
-<p>![[overlappingroundsratio.svg]]</p>
-
+        
       </div>
     </article>
 

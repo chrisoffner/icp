@@ -14,8 +14,8 @@
       <pubDate>Sat, 15 Jan 2022 22:30:00 +0100</pubDate>
       
       <guid>https://chrisoffner.github.io/studynotes/posts/2022/01/%EF%B8%8F-conflicting-interpretations-of-icp-translation/</guid>
-      <description>The construction Arthur &amp;amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter over which ICP is supposed to require $|B|$ iterations to terminate.
-However, I&amp;rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.
+      <description>The construction Arthur &amp;amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter on which ICP is supposed to require $|B|$ iterations to terminate.
+However, I&amp;rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.
 Previously we have discussed the following lemma by Ezra, Efrat, and Sharir.</description>
     </item>
     
