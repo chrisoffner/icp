@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 09 Jan 2022 21:42:00 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 22:30:00 +0100</lastBuildDate><atom:link href="https://chrisoffner.github.io/studynotes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>⚔️ Conflicting interpretations of ICP translation?</title>
+      <link>https://chrisoffner.github.io/studynotes/posts/2022/01/%EF%B8%8F-conflicting-interpretations-of-icp-translation/</link>
+      <pubDate>Sat, 15 Jan 2022 22:30:00 +0100</pubDate>
+      
+      <guid>https://chrisoffner.github.io/studynotes/posts/2022/01/%EF%B8%8F-conflicting-interpretations-of-icp-translation/</guid>
+      <description>The construction Arthur &amp;amp; Vassilvitskii use to prove their $\Omega(n^2)$ lower bound for the ICP algorithm in $\mathbb{R}$ uses a point configuration they call The Linear Shifter over which ICP is supposed to require $|B|$ iterations to terminate.
+However, I&amp;rsquo;m having some issues getting this to work as intended, which seem to stem from my trouble reconciling two interpretations of the relative translation between iterations.
+Previously we have discussed the following lemma by Ezra, Efrat, and Sharir.</description>
+    </item>
+    
     <item>
       <title>🔧 Fixing the lower bound proof</title>
       <link>https://chrisoffner.github.io/studynotes/posts/2022/01/fixing-the-lower-bound-proof/</link>
