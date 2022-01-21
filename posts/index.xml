@@ -53,7 +53,7 @@ The relative translation $\boldsymbol{\Delta t_i}$  is the averaged sum of diffe
 <p>$(1)$ is the <em>&ldquo;vanilla&rdquo;</em> way to think about the ICP algorithm; at each step, the algorithm tries to minimise its loss function, i.e. the distance of each point in $a$ to its nearest neighbor in $B$.</p>
 <p>So now that $a = 1$ we have $N_B(a) = b_1 = 1$, we would get a new translation of $\frac{1}{k}(N_B(a) - a) = \frac{1}{k}(b_1 - a) =  \frac{1}{4}(1 - 1) = 0$, which means that under the <em>loss interpretation</em>, the algorithm would terminate in constant time after the second iteration.</p>
 <hr>
-<p>🤔 My speculation is that this problem might arise because equivalence of $(1)$ and $(2)$ from the aforementioned Lemma 2.3. is holds only if there is <em>no initial translation</em>.</p>
+<p>🤔 My speculation is that this problem might arise because equivalence of $(1)$ and $(2)$ from the aforementioned Lemma 2.3. holds only if there is <em>no initial translation</em> (although I cannot yet say if this is true).</p>
 <p><em>Ezra et al.</em> present a version of the algorithm in which no initial translation is given, and so even the first translation is calculated via $(1)$ – which in this example of $a = 0 = b_0 = N_B(a)$ would mean that the algorithm would terminate immediately.</p>
 <p>If this suspicion is accurate, it might be problematic for the construction by <em>Arthur and Vassilvitskii</em> as it seems to rely heavily both on $(2)$ and on using an initial nonzero translation.</p>
 ]]></content>
@@ -466,16 +466,6 @@ Problem definition Let $A = \{{\boldsymbol{a_1}, &amp;hellip;, \boldsymbol{a_m}\
 <p><img src="/images/icp_graph_05.svg" alt="icp_graph_05.svg"></p>
 <p>Next up we will derive the optimal relative translation vector $\boldsymbol{\Delta t_i}$ at every step.</p>
 ]]></content>
-        </item>
-        
-        <item>
-            <title></title>
-            <link>https://chrisoffner.github.io/studynotes/posts/1/01/</link>
-            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            
-            <guid>https://chrisoffner.github.io/studynotes/posts/1/01/</guid>
-            <description></description>
-            <content type="html"><![CDATA[]]></content>
         </item>
         
     </channel>

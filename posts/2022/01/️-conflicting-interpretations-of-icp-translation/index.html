@@ -47,7 +47,7 @@ Previously we have discussed the following lemma by Ezra, Efrat, and Sharir." />
 However, I&rsquo;m having some issues getting this to work as intended, presumably rooted in difficulties reconciling two interpretations of the relative translation between iterations.
 Previously we have discussed the following lemma by Ezra, Efrat, and Sharir."><meta itemprop="datePublished" content="2022-01-15T22:30:00+01:00" />
 <meta itemprop="dateModified" content="2022-01-15T22:30:00+01:00" />
-<meta itemprop="wordCount" content="734"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
+<meta itemprop="wordCount" content="742"><meta itemprop="image" content="https://chrisoffner.github.io/studynotes/"/>
 <meta itemprop="keywords" content="icp,algorithm,visualisation," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://chrisoffner.github.io/studynotes/"/>
@@ -208,7 +208,7 @@ The relative translation $\boldsymbol{\Delta t_i}$  is the averaged sum of diffe
 <p>$(1)$ is the <em>&ldquo;vanilla&rdquo;</em> way to think about the ICP algorithm; at each step, the algorithm tries to minimise its loss function, i.e. the distance of each point in $a$ to its nearest neighbor in $B$.</p>
 <p>So now that $a = 1$ we have $N_B(a) = b_1 = 1$, we would get a new translation of $\frac{1}{k}(N_B(a) - a) = \frac{1}{k}(b_1 - a) =  \frac{1}{4}(1 - 1) = 0$, which means that under the <em>loss interpretation</em>, the algorithm would terminate in constant time after the second iteration.</p>
 <hr>
-<p>🤔 My speculation is that this problem might arise because equivalence of $(1)$ and $(2)$ from the aforementioned Lemma 2.3. is holds only if there is <em>no initial translation</em>.</p>
+<p>🤔 My speculation is that this problem might arise because equivalence of $(1)$ and $(2)$ from the aforementioned Lemma 2.3. holds only if there is <em>no initial translation</em> (although I cannot yet say if this is true).</p>
 <p><em>Ezra et al.</em> present a version of the algorithm in which no initial translation is given, and so even the first translation is calculated via $(1)$ – which in this example of $a = 0 = b_0 = N_B(a)$ would mean that the algorithm would terminate immediately.</p>
 <p>If this suspicion is accurate, it might be problematic for the construction by <em>Arthur and Vassilvitskii</em> as it seems to rely heavily both on $(2)$ and on using an initial nonzero translation.</p>
 
